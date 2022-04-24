@@ -2,6 +2,12 @@
 
 ## 深圳-大冲
 
+[![](https://img.shields.io/badge/Author-yuanwu-orange.svg)](https://gitee.com/yuanwu233/CrazyNote) 
+[![star](https://gitee.com/yuanwu233/CrazyNote/badge/star.svg?theme=dark)](https://gitee.com/yuanwu233/CrazyNote)
+[![fork](https://gitee.com/yuanwu233/CrazyNote/badge/fork.svg?theme=dark)](https://gitee.com/yuanwu233/CrazyNote)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Doing-code/Java-Two-years-of-work-experience?logo=github)](https://github.com/Doing-code/Java-Two-years-of-work-experience)
+[![GitHub forks](https://img.shields.io/github/forks/Doing-code/Java-Two-years-of-work-experience?logo=github)](https://github.com/Doing-code/Java-Two-years-of-work-experience)
+
 # 免责声明
     该仓库文档均为搬运或学习后的总结,非原创.
     有些没有及时表明来源.固笔记开源无法标注源来源.
