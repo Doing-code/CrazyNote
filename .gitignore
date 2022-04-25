@@ -1,4 +1,5 @@
 /.idea/
+**/source-code/.idea
 
 /package-lock.json
 
