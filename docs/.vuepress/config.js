@@ -186,31 +186,31 @@ module.exports = {
                         items: [
                             {
                                 text: 'jvm',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'jmm',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: '类装载机制',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: '多线程并发',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'IO',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: '网络编程',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: '23设计模式',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -219,31 +219,31 @@ module.exports = {
                         items: [
                             {
                                 text: 'MySQL',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Oracle',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Redis',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'MongoDB',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Memcache',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Hbase',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Opentsdb',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -251,28 +251,28 @@ module.exports = {
                         text: '框架',
                         items: [
                             {
-                                text: 'Spring',
-                                link: 'md/about/me/about-me.md'
+                                text: 'Spring注解驱动',
+                                link: '/md/framework/spring/2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md'
                             },
                             {
                                 text: 'SpringMVC',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'MyBatis',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Spring Boot',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Spring Cloud',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Vertx',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -281,15 +281,15 @@ module.exports = {
                         items: [
                             {
                                 text: 'Dubbo',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'gRPC',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Thrift',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -298,22 +298,22 @@ module.exports = {
                         items: [
                             {
                                 text: 'Nacos',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: '服务注册中心',
                                 items: [
                                     {
                                         text: 'Zookeeper',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     },
                                     {
                                         text: 'Consul',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     },
                                     {
                                         text: 'Eureka',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     }
                                 ]
                             },
@@ -322,15 +322,15 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'Ribbon',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     },
                                     {
                                         text: 'LoadBalancer',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     },
                                     {
                                         text: 'OpenFeign',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     }
                                 ]
                             },
@@ -339,11 +339,11 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'resilience4j',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     },
                                     {
                                         text: 'sentinel',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     }
                                 ]
                             },
@@ -352,11 +352,11 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'gateway',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     },
                                     {
                                         text: 'Zuul2',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     }
                                 ]
                             },
@@ -365,7 +365,7 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'Apollo',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     }
                                 ]
                             }
@@ -376,7 +376,7 @@ module.exports = {
                         items: [
                             {
                                 text: 'Kafka',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -385,11 +385,11 @@ module.exports = {
                         items: [
                             {
                                 text: 'Kubernetes',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Docker',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -398,36 +398,36 @@ module.exports = {
                         items: [
                             {
                                 text: 'Linux',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Shell 脚本',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
                     {
-                        text: 'web服务器',
+                        text: '服务器',
                         items: [
                             {
                                 text: 'Tomcat',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Jboss',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Nginx',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'OpenResty',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Weblogic',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -436,7 +436,7 @@ module.exports = {
                         items: [
                             {
                                 text: 'Netty',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -445,7 +445,7 @@ module.exports = {
                         items: [
                             {
                                 text: 'Elasticsearch',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -454,11 +454,11 @@ module.exports = {
                         items: [
                             {
                                 text: 'Jenkins',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             },
                             {
                                 text: 'Gitlab',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
@@ -470,11 +470,11 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'maven',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     },
                                     {
                                         text: 'Gradle',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     }
                                 ],
 
@@ -485,39 +485,53 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'git',
-                                        link: 'md/about/me/about-me.md'
+                                        link: '/md/about/me/about-me.md'
                                     }
                                 ]
                             }
                         ]
                     },
                     {
-                        text: '网络协议',
+                        text: '网络',
                         items: [
                             {
                                 text: 'TCP/IP',
-                                link: 'md/about/me/about-me.md'
+                                link: '/md/about/me/about-me.md'
                             }
                         ]
                     },
-                    {
-                        text: '关于',
-                        items: [
-                            {
-                                text: 'about',
-                                link: 'md/about/me/about-me.md'
-                            }
-                        ]
-                    },
+                    // {
+                    //     text: '关于',
+                    //     items: [
+                    //         {
+                    //             text: 'about',
+                    //             link: '/md/about/me/about-me.md'
+                    //         }
+                    //     ]
+                    // },
                     {
                         text: 'Github',
                         link: 'https://github.com/Doing-code/CrazyNote'
                     }
                 ],
                 sidebar: {
-                    
+                    "/md/framework/spring/": getBarFrameworkTheSpring(),
                 }
             }
         }
     }
+}
+
+function getBarFrameworkTheSpring() {
+    return [
+        {
+            title: "组件注入",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md",
+                "Bean的初始化.md"
+            ]
+        }
+    ]
 }
