@@ -5,3 +5,9 @@
 /node_modules/
 
 /.site/
+
+**/mvnw
+**/mvnw.cmd
+**/.mvn
+**/target/
+**/source-code/**/**.iml
