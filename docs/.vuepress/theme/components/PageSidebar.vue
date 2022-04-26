@@ -39,9 +39,10 @@
 <!--        <FullScreenBtn />-->
 <!--      </div>-->
 
-
-
-
+      <div class="option-box" @click="$emit('toggle-sidebar-force')">
+        <img src="/images/system/pre2.png" width="30px" class="nozoom" />
+        <span class="show-txt">左栏</span>
+      </div>
 
       <div class="option-box" v-if="prev" style="padding-left:2px;text-align:center;" v-bind:title="prev.title">
           <router-link v-if="prev" :to="prev.path" >

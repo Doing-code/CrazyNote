@@ -32,13 +32,16 @@ module.exports = {
     locales: {
         "/": {
             lang: "zh-CN",
-            title: "堆栈",
-            description: "包含: 主流框架以及中间件的入门使用"
+            title: "taspile",
+            description: "If the content of the website is not clearly marked \"original\", are carried, that is, after learning new knowledge points and consult the existing tutorial, in the original basis of their own language.If the content in the article makes you feel uncomfortable or infringing to you.Please contact me, and you will delete the corresponding article."
         }
     },
     head: [
         // ico
         ["link", {rel: "icon", href: `/favicon.ico`}],
+        ["link", {rel: "apple-touch-icon", href: `/apple-touch-icon.png`}],
+        ["link", {rel: "icon", href: `/favicon-32x32.png"`}],
+        ["link", {rel: "manifest", href: `/site.webmanifest`}],
         // meta
         ["meta", {name: "robots", content: "all"}],
         ["meta", {name: "author", content: "Lee"}],
@@ -47,7 +50,7 @@ module.exports = {
         ["meta", {"http-equiv": "Expires", content: "0"}],
         ["meta", {
             name: "keywords",
-            content: "堆栈: Spring、RPC、面向Google编程."
+            content: "taspile"
         }],
         ["meta", {name: "apple-mobile-web-app-capable", content: "yes"}],
         ['script',
@@ -398,11 +401,7 @@ module.exports = {
                         items: [
                             {
                                 text: 'Linux',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Shell 脚本',
-                                link: '/md/about/me/about-me.md'
+                                link: '/md/os/linux/2022-04-26-第一章：Linux 操作文件目录.md'
                             }
                         ]
                     },
@@ -470,11 +469,11 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'maven',
-                                        link: '/md/about/me/about-me.md'
+                                        link: '/md/tools/git/2022-04-26-Git入门到放弃，一篇就够了！.md'
                                     },
                                     {
                                         text: 'Gradle',
-                                        link: '/md/about/me/about-me.md'
+                                        link: '/md/about/maven/about-me.md'
                                     }
                                 ],
 
@@ -485,7 +484,7 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'git',
-                                        link: '/md/about/me/about-me.md'
+                                        link: '/md/tools/git/2022-04-26-Git入门到放弃，一篇就够了！.md'
                                     }
                                 ]
                             }
@@ -516,12 +515,14 @@ module.exports = {
                 ],
                 sidebar: {
                     "/md/framework/spring/": getBarFrameworkTheSpring(),
+                    "/md/os/linux/": getBarOperatingSystemTheLinux()
                 }
             }
         }
     }
 }
 
+// 3
 function getBarFrameworkTheSpring() {
     return [
         {
@@ -529,8 +530,58 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md",
-                "Bean的初始化.md"
+                "2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md"
+            ]
+        },
+        {
+            title: "生命周期",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+            ]
+        },
+        {
+            title: "属性赋值",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+            ]
+        },
+        {
+            title: "自动装配",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+            ]
+        },
+        {
+            title: "源码解析",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2022-04-26：Bean的初始化.md"
+            ]
+        }
+    ]
+}
+
+// 8
+function getBarOperatingSystemTheLinux() {
+    return [
+        {
+            title: "实操篇",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2022-04-26-第一章：Linux 操作文件目录.md"
+            ]
+        },
+        {
+            title: "扩展篇",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+
             ]
         }
     ]

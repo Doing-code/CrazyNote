@@ -1,5 +1,5 @@
 # 第一章：@Configuration和@Bean给容器中注册组件
-
+> There is no fate but what we make for ourselves.
 ## 是什么
 @Configuration 是一个类级别的注解，用来代替xml的配置类组件， 如果在一个类上标注了 `@Configuration` 注解， 相当于xml配置中的 `<beans></beans>` 标签，即配置类==配置文件。
 
