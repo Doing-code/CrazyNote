@@ -13,3 +13,4 @@
 **/.mvn
 **/target/
 **/source-code/**/**.iml
+**/source-code/**/**/target/
