@@ -469,7 +469,7 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'maven',
-                                        link: '/md/tools/git/2022-04-26-Git入门到放弃，一篇就够了！.md'
+                                        link: '/md/about/maven/about-me.md'
                                     },
                                     {
                                         text: 'Gradle',
