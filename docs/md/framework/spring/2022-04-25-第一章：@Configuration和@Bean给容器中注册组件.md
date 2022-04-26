@@ -15,24 +15,24 @@
 
 ## 怎么玩
 
-### 案例工程
+### 工程结构
 
 ```java
 section01
 └── src
-    ├── main
-    │   ├── java
-    │   │   └── cn.taspile.section01
-    │   │       └── bean
-    │   │       	└── Person.java
-    │   │       └── config
-    │   │       	└── BeanConfig.java
-    │   │       └── App.java
-    │   └── resources	
-    │       └── applicationContent.xml
-    └── test
-         └── java
-└── pom.xml
+│   ├── main
+│   │   ├── java
+│   │   │   └── cn.taspile.section01
+│   │   │       │── bean
+│   │   │       │	└── Person.java
+│   │   │       │── config
+│   │   │       │	└── BeanConfig.java
+│   │   │       └── App.java
+│   │   └── resources	
+│   │       └── applicationContent.xml
+│   └── test
+│        └── java
+└── pom.xm
 ```
 
 ### 通过XML配置文件的方式注入 JavaBean

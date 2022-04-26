@@ -93,9 +93,9 @@ module.exports = {
         ]
     ],
     plugins: [
-        [
-            {globalUIComponents: ['LockArticle', 'PayArticle']}
-        ],
+        // [
+        //     {globalUIComponents: ['LockArticle', 'PayArticle']}
+        // ],
         // ['@vssue/vuepress-plugin-vssue', {
         //     platform: 'github-v3', //v3的platform是github，v4的是github-v4
         //     // 其他的 Vssue 配置
@@ -184,72 +184,72 @@ module.exports = {
                 editLinkText: "在 GitHub 上编辑此页",
                 lastUpdated: "上次更新",
                 nav: [
-                    {
-                        text: 'Java',
-                        items: [
-                            {
-                                text: 'jvm',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'jmm',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: '类装载机制',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: '多线程并发',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'IO',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: '网络编程',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: '23设计模式',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
-                    {
-                        text: '数据库',
-                        items: [
-                            {
-                                text: 'MySQL',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Oracle',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Redis',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'MongoDB',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Memcache',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Hbase',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Opentsdb',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
+                    // {
+                    //     text: 'Java',
+                    //     items: [
+                    //         {
+                    //             text: 'jvm',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'jmm',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: '类装载机制',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: '多线程并发',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'IO',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: '网络编程',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: '23设计模式',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
+                    // {
+                    //     text: '数据库',
+                    //     items: [
+                    //         {
+                    //             text: 'MySQL',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Oracle',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Redis',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'MongoDB',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Memcache',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Hbase',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Opentsdb',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
                     {
                         text: '框架',
                         items: [
@@ -257,145 +257,145 @@ module.exports = {
                                 text: 'Spring注解驱动',
                                 link: '/md/framework/spring/2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md'
                             },
-                            {
-                                text: 'SpringMVC',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'MyBatis',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Spring Boot',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Spring Cloud',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Vertx',
-                                link: '/md/about/me/about-me.md'
-                            }
+                            // {
+                            //     text: 'SpringMVC',
+                            //     link: ''
+                            // },
+                            // {
+                            //     text: 'MyBatis',
+                            //     link: ''
+                            // },
+                            // {
+                            //     text: 'Spring Boot',
+                            //     link: ''
+                            // },
+                            // {
+                            //     text: 'Spring Cloud',
+                            //     link: ''
+                            // },
+                            // {
+                            //     text: 'Vertx',
+                            //     link: ''
+                            // }
                         ]
                     },
-                    {
-                        text: 'RPC',
-                        items: [
-                            {
-                                text: 'Dubbo',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'gRPC',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Thrift',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
-                    {
-                        text: '微服务',
-                        items: [
-                            {
-                                text: 'Nacos',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: '服务注册中心',
-                                items: [
-                                    {
-                                        text: 'Zookeeper',
-                                        link: '/md/about/me/about-me.md'
-                                    },
-                                    {
-                                        text: 'Consul',
-                                        link: '/md/about/me/about-me.md'
-                                    },
-                                    {
-                                        text: 'Eureka',
-                                        link: '/md/about/me/about-me.md'
-                                    }
-                                ]
-                            },
-                            {
-                                text: '服务调用',
-                                items: [
-                                    {
-                                        text: 'Ribbon',
-                                        link: '/md/about/me/about-me.md'
-                                    },
-                                    {
-                                        text: 'LoadBalancer',
-                                        link: '/md/about/me/about-me.md'
-                                    },
-                                    {
-                                        text: 'OpenFeign',
-                                        link: '/md/about/me/about-me.md'
-                                    }
-                                ]
-                            },
-                            {
-                                text: '服务降级',
-                                items: [
-                                    {
-                                        text: 'resilience4j',
-                                        link: '/md/about/me/about-me.md'
-                                    },
-                                    {
-                                        text: 'sentinel',
-                                        link: '/md/about/me/about-me.md'
-                                    }
-                                ]
-                            },
-                            {
-                                text: '服务网关',
-                                items: [
-                                    {
-                                        text: 'gateway',
-                                        link: '/md/about/me/about-me.md'
-                                    },
-                                    {
-                                        text: 'Zuul2',
-                                        link: '/md/about/me/about-me.md'
-                                    }
-                                ]
-                            },
-                            {
-                                text: '服务配置',
-                                items: [
-                                    {
-                                        text: 'Apollo',
-                                        link: '/md/about/me/about-me.md'
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        text: '消息队列',
-                        items: [
-                            {
-                                text: 'Kafka',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
-                    {
-                        text: '容器',
-                        items: [
-                            {
-                                text: 'Kubernetes',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Docker',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
+                    // {
+                    //     text: 'RPC',
+                    //     items: [
+                    //         {
+                    //             text: 'Dubbo',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'gRPC',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Thrift',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
+                    // {
+                    //     text: '微服务',
+                    //     items: [
+                    //         {
+                    //             text: 'Nacos',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: '服务注册中心',
+                    //             items: [
+                    //                 {
+                    //                     text: 'Zookeeper',
+                    //                     link: ''
+                    //                 },
+                    //                 {
+                    //                     text: 'Consul',
+                    //                     link: ''
+                    //                 },
+                    //                 {
+                    //                     text: 'Eureka',
+                    //                     link: ''
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             text: '服务调用',
+                    //             items: [
+                    //                 {
+                    //                     text: 'Ribbon',
+                    //                     link: ''
+                    //                 },
+                    //                 {
+                    //                     text: 'LoadBalancer',
+                    //                     link: ''
+                    //                 },
+                    //                 {
+                    //                     text: 'OpenFeign',
+                    //                     link: ''
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             text: '服务降级',
+                    //             items: [
+                    //                 {
+                    //                     text: 'resilience4j',
+                    //                     link: ''
+                    //                 },
+                    //                 {
+                    //                     text: 'sentinel',
+                    //                     link: ''
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             text: '服务网关',
+                    //             items: [
+                    //                 {
+                    //                     text: 'gateway',
+                    //                     link: ''
+                    //                 },
+                    //                 {
+                    //                     text: 'Zuul2',
+                    //                     link: ''
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             text: '服务配置',
+                    //             items: [
+                    //                 {
+                    //                     text: 'Apollo',
+                    //                     link: ''
+                    //                 }
+                    //             ]
+                    //         }
+                    //     ]
+                    // },
+                    // {
+                    //     text: '消息队列',
+                    //     items: [
+                    //         {
+                    //             text: 'Kafka',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
+                    // {
+                    //     text: '容器',
+                    //     items: [
+                    //         {
+                    //             text: 'Kubernetes',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Docker',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
                     {
                         text: '操作系统',
                         items: [
@@ -405,106 +405,106 @@ module.exports = {
                             }
                         ]
                     },
-                    {
-                        text: '服务器',
-                        items: [
-                            {
-                                text: 'Tomcat',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Jboss',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Nginx',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'OpenResty',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Weblogic',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
-                    {
-                        text: '网络编程',
-                        items: [
-                            {
-                                text: 'Netty',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
-                    {
-                        text: '搜索引擎',
-                        items: [
-                            {
-                                text: 'Elasticsearch',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
-                    {
-                        text: '部署',
-                        items: [
-                            {
-                                text: 'Jenkins',
-                                link: '/md/about/me/about-me.md'
-                            },
-                            {
-                                text: 'Gitlab',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
+                    // {
+                    //     text: '服务器',
+                    //     items: [
+                    //         {
+                    //             text: 'Tomcat',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Jboss',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Nginx',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'OpenResty',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Weblogic',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
+                    // {
+                    //     text: '网络编程',
+                    //     items: [
+                    //         {
+                    //             text: 'Netty',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
+                    // {
+                    //     text: '搜索引擎',
+                    //     items: [
+                    //         {
+                    //             text: 'Elasticsearch',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
+                    // {
+                    //     text: '部署',
+                    //     items: [
+                    //         {
+                    //             text: 'Jenkins',
+                    //             link: ''
+                    //         },
+                    //         {
+                    //             text: 'Gitlab',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
                     {
                         text: 'tools',
                         items: [
-                            {
-                                text: '项目管理工具',
-                                items: [
-                                    {
-                                        text: 'maven',
-                                        link: '/md/about/maven/about-me.md'
-                                    },
-                                    {
-                                        text: 'Gradle',
-                                        link: '/md/about/maven/about-me.md'
-                                    }
-                                ],
-
-                            },
+                            // {
+                            //     text: '项目管理工具',
+                            //     items: [
+                            //         {
+                            //             text: 'Maven',
+                            //             link: '/md/about/maven/about-me.md'
+                            //         },
+                            //         {
+                            //             text: 'Gradle',
+                            //             link: '/md/about/maven/about-me.md'
+                            //         }
+                            //     ],
+                            //
+                            // },
 
                             {
                                 text: '版本控制工具',
                                 items: [
                                     {
-                                        text: 'git',
-                                        link: '/md/tools/git/2022-04-26-Git入门到放弃，一篇就够了！.md'
+                                        text: 'Git',
+                                        link: '/md/tools/git/2022-04-26：Git之本地仓库篇.md'
                                     }
                                 ]
                             }
                         ]
                     },
-                    {
-                        text: '网络',
-                        items: [
-                            {
-                                text: 'TCP/IP',
-                                link: '/md/about/me/about-me.md'
-                            }
-                        ]
-                    },
+                    // {
+                    //     text: '网络',
+                    //     items: [
+                    //         {
+                    //             text: 'TCP/IP',
+                    //             link: ''
+                    //         }
+                    //     ]
+                    // },
                     // {
                     //     text: '关于',
                     //     items: [
                     //         {
                     //             text: 'about',
-                    //             link: '/md/about/me/about-me.md'
+                    //             link: ''
                     //         }
                     //     ]
                     // },
@@ -515,7 +515,8 @@ module.exports = {
                 ],
                 sidebar: {
                     "/md/framework/spring/": getBarFrameworkTheSpring(),
-                    "/md/os/linux/": getBarOperatingSystemTheLinux()
+                    "/md/os/linux/": getBarOperatingSystemTheLinux(),
+                    "/md/tools/git/": getBarToolsTheGit()
                 }
             }
         }
@@ -530,7 +531,8 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md"
+                "2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md",
+                "2022-04-26-第二章：@ComponentScan-自动扫描组件&指定扫描规则.md"
             ]
         },
         {
@@ -582,6 +584,20 @@ function getBarOperatingSystemTheLinux() {
             sidebarDepth: 0,
             children: [
 
+            ]
+        }
+    ]
+}
+
+function getBarToolsTheGit() {
+    return [
+        {
+            title: "Git",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2022-04-26：Git之本地仓库篇.md",
+                "2022-04-26：Git之远程仓库篇.md"
             ]
         }
     ]
