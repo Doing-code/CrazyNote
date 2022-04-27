@@ -484,7 +484,7 @@ module.exports = {
                                 items: [
                                     {
                                         text: 'Git',
-                                        link: '/md/tools/git/2022-04-26：Git之本地仓库篇.md'
+                                        link: '/md/tools/git/2022-04-26-第一章：Git 概述.md'
                                     }
                                 ]
                             }
@@ -596,8 +596,9 @@ function getBarToolsTheGit() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-04-26：Git之本地仓库篇.md",
-                "2022-04-26：Git之远程仓库篇.md"
+                "2022-04-26-第一章：Git 概述.md",
+                "2022-04-26-第二章：Git 常用命令.md",
+                "2022-04-27-第三章：Git 分支操作.md"
             ]
         }
     ]
