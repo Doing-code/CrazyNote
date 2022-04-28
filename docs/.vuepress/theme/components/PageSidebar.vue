@@ -40,19 +40,19 @@
 <!--      </div>-->
 
       <div class="option-box" @click="$emit('toggle-sidebar-force')">
-        <img src="/images/system/pre2.png" width="30px" class="nozoom" />
+        <img src="/images/system/left-column.png" width="35px" class="nozoom" />
         <span class="show-txt">左栏</span>
       </div>
 
       <div class="option-box" v-if="prev" style="padding-left:2px;text-align:center;" v-bind:title="prev.title">
           <router-link v-if="prev" :to="prev.path" >
-            <img src="/images/system/pre2.png" width="30px" class="nozoom" />
+            <img src="/images/system/next2.png" width="35px" class="nozoom" />
             <span class="show-txt">上一篇</span>
           </router-link>
       </div>
       <div class="option-box" v-if="next" style="padding-left:2px;text-align:center;" v-bind:title="next.title">
           <router-link v-if="next" :to="next.path" >
-            <img src="/images/system/next2.png" width="30px" class="nozoom" />
+            <img src="/images/system/pre2.png" width="35px" class="nozoom" />
             <span class="show-txt">下一篇</span>
           </router-link>
       </div>

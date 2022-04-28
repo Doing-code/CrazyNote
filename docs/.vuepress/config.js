@@ -32,8 +32,8 @@ module.exports = {
     locales: {
         "/": {
             lang: "zh-CN",
-            title: "taspile",
-            description: "If the content of the website is not clearly marked \"original\", are carried, that is, after learning new knowledge points and consult the existing tutorial, in the original basis of their own language.If the content in the article makes you feel uncomfortable or infringing to you.Please contact me, and you will delete the corresponding article."
+            title: "forbearance",
+            description: "Patience, restraint, and tolerance"
         }
     },
     head: [
@@ -50,7 +50,7 @@ module.exports = {
         ["meta", {"http-equiv": "Expires", content: "0"}],
         ["meta", {
             name: "keywords",
-            content: "taspile"
+            content: "forbearance"
         }],
         ["meta", {name: "apple-mobile-web-app-capable", content: "yes"}],
         ['script',
@@ -93,20 +93,7 @@ module.exports = {
         ]
     ],
     plugins: [
-        // [
-        //     {globalUIComponents: ['LockArticle', 'PayArticle']}
-        // ],
-        // ['@vssue/vuepress-plugin-vssue', {
-        //     platform: 'github-v3', //v3的platform是github，v4的是github-v4
-        //     // 其他的 Vssue 配置
-        //     owner: 'fuzhengwei', //github账户名
-        //     repo: 'CodeGuide', //github一个项目的名称
-        //     clientId: 'df8beab2190bec20352a',//注册的Client ID
-        //     clientSecret: '7eeeb4369d699c933f02a026ae8bb1e2a9c80e90',//注册的Client Secret
-        //     autoCreateIssue: true // 自动创建评论，默认是false，最好开启，这样首次进入页面的时候就不用去点击创建评论的按钮了。
-        // }
-        // ],
-        // ['@vuepress/back-to-top', true], replaced with inject page-sidebar
+        // ['@vuepress/back-to-top', true], // replaced with inject page-sidebar
         ['@vuepress/medium-zoom', {
             selector: 'img:not(.nozoom)',
             // See: https://github.com/francoischalifour/medium-zoom#options
@@ -124,17 +111,6 @@ module.exports = {
                 },
             }
         }],
-        // see: https://vuepress.github.io/zh/plugins/copyright/#%E5%AE%89%E8%A3%85
-        // ['copyright', {
-        //     noCopy: false, // 允许复制内容
-        //     minLength: 100, // 如果长度超过 100 个字符
-        //     authorName: "https://bugstack.cn",
-        //     clipboardComponent: "请注明文章出处, [bugstack虫洞栈](https://bugstack.cn)"
-        // }],
-        // see: https://github.com/ekoeryanto/vuepress-plugin-sitemap
-        // ['sitemap', {
-        //     hostname: 'https://bugstack.cn'
-        // }],
         // see: https://github.com/IOriens/vuepress-plugin-baidu-autopush
         ['vuepress-plugin-baidu-autopush', {}],
         // see: https://github.com/znicholasbrown/vuepress-plugin-code-copy
