@@ -537,7 +537,7 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-04-26：Bean的初始化.md"
+                "2022-04-20：Bean的初始化.md"
             ]
         }
     ]

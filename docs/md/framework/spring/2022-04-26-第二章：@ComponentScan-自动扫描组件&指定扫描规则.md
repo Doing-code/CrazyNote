@@ -128,7 +128,7 @@ public class Book {
 
     <!-- 向Spring容器中注册组件 -->
     <bean id="book" class="cn.taspile.section02.bean.Book">
-        <property name="bookName" value="鸟哥Linux私房菜"></property>
+        <property name="bookName" value="forbearance.cn"></property>
         <property name="price" value="49"></property>
     </bean>
 
@@ -236,7 +236,7 @@ public class BeanConfig {
 
     @Bean
     public Book book() {
-        return new Book("鸟哥Linux私房菜", 49);
+        return new Book("forbearance.cn", 49);
     }
 }
 ```

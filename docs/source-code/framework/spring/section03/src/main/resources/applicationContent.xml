@@ -9,10 +9,10 @@
 						http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
     <!-- 包扫描：只要是标注了我们熟悉的@Controller、@Service、@Repository、@Component这四个注解中的任何一个的组件，它就会被自动扫描，并加进容器中 -->
-    <context:component-scan base-package="cn.forbearance.section02"></context:component-scan>
+    <context:component-scan base-package="cn.forbearance.section03"></context:component-scan>
 
     <!-- 向Spring容器中注册组件 -->
-    <bean id="book" class="cn.forbearance.section02.bean.Book">
+    <bean id="book" class="cn.forbearance.section03.bean.Book">
         <property name="bookName" value="forbearance.cn"></property>
         <property name="price" value="49"></property>
     </bean>
