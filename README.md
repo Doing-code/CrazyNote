@@ -1,6 +1,4 @@
-## 入坑指南
-
-## 深圳-大冲
+> 这个仓库是由 `通过阅览技术大牛的优质博文以及学习b站技术视频` 孕育而生的。可以说仓库的文章99%都是从大牛的博客中或直接搬运编写而成的文章仓库。
 
 [![](https://img.shields.io/badge/Author-yuanwu-orange.svg)](https://gitee.com/yuanwu233/CrazyNote) 
 [![star](https://gitee.com/yuanwu233/CrazyNote/badge/star.svg?theme=dark)](https://gitee.com/yuanwu233/CrazyNote)
@@ -8,24 +6,24 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/Doing-code/Java-Two-years-of-work-experience?logo=github)](https://github.com/Doing-code/Java-Two-years-of-work-experience)
 [![GitHub forks](https://img.shields.io/github/forks/Doing-code/Java-Two-years-of-work-experience?logo=github)](https://github.com/Doing-code/Java-Two-years-of-work-experience)
 
-# 免责声明
-    该仓库文档均为搬运或学习后的总结,非原创.
-    有些没有及时表明来源.固笔记开源无法标注源来源.
-    若文中有哪些内容侵权或者让您感到不适, 请与我联系 .届时关闭.
+## `工作地点目标: 深圳大冲，(高新园地铁站)`
 
-## 任务列表
-- [ ] 编程语言 Go (Beego、Gin、Iris)
-- [ ] 编程语言 Python
+## 非原创！非原创！非原创！
 
-- [ ] Java 基础
-    - [ ] JVM
-    - [ ] JMM
-    - [ ] 类装载机制
-    - [ ] 多线程并发
-    - [ ] IO
-    - [ ] 网络
+## 目前仓库支持的技术文章
+### 编程语言
+- [ ]  Go (Beego、Gin、Iris)
+- [ ] Python
+
+### Java 基础
+- [ ] JVM
+- [ ] JMM
+- [ ] 类装载机制
+- [ ] 多线程并发
+- [ ] IO
+- [ ] 网络
     
-关系型 / 非关系型数据库
+### 关系型 / 非关系型数据库
 - [ ] MySQL
 - [ ] Oracle
 - [ ] Redis
@@ -34,7 +32,7 @@
 - [ ] Hbase 
 - [ ] Opentsdb 
 
-框架
+### 框架
 - [ ] Spring
 - [ ] SpringMVC
 - [ ] MyBatis
@@ -42,12 +40,12 @@
 - [ ] Spring Cloud
 - [ ] Vertx
 
-RPC 分布式服务框架(远程过程调用)
+### RPC 分布式服务框架(远程过程调用)
 - [ ] Dubbo
 - [ ] gRPC
 - [ ] Thrift
 
-分布式应用程序协调服务(集群协调服务)
+### 分布式应用程序协调服务(集群协调服务)
 - [ ] ETCD (用Go写的)
 - 服务注册中心
     - [ ] Zookeeper
@@ -70,78 +68,40 @@ RPC 分布式服务框架(远程过程调用)
 - 服务总线
     - [ ] Nacos
 
-消息队列
+### 消息队列
 - [ ] Kafka
 
-容器
+### 容器
 - [ ] Kubernetes
 - [ ] Docker 
 
-操作系统
+### 操作系统
 - [ ] Linux 
 - [ ] Shell 脚本
 
-Web 应用服务器
+### Web 应用服务器
 - [ ] Tomcat 
 - [ ] Jboss  
 - [ ] Nginx 
 - [ ] OpenResty 
 - [ ] Weblogic 
 
-NIO 网络应用框架
+### NIO 网络应用框架
 - [ ] Netty 
 
-搜索引擎
+### 搜索引擎
 - [ ] Elasticsearch 
 
-持续交付
+### 持续交付
 - [ ] Jenkins 
 - [ ] Gitlab 
 
-项目管理工具
+### 项目管理工具
 - [ ] Maven 
 - [ ] Gradle
 
-版本控制工具
+### 版本控制工具
 - [ ] Git 
 
-网络
+### 网络
 - [ ] TCP/IP
-
-
-
-
-## 目录
-le serein:日落时分,"倾辉引暮色"
-
-about
-
-container 容器
-
-database 数据库
-
-devops 持续交付
-
-es 搜索引擎
-
-framework 框架
-
-java
-
-manage 项目管理工具
-
-microservice 分布式应用程序协调服务
-
-mq 消息队列
-
-netty 网络应用框架
-
-network 网络
-
-os 操作系统
-
-rpc 分布式服务框架
-
-vg 版本控制
-
-webservice web应用服务器
