@@ -1,4 +1,4 @@
-# 自定义TypeFilter指定过滤规则
+# 第三章：自定义TypeFilter指定过滤规则
 
 ## 是什么
 默认情况下，使用`@Component`、`@Repository`、`@Service`、`@Controller`、`@Configuration`标注的类，或者用`@Component`标注的自定义注解能够被Spring扫描到容器中，除此之外，也可以通过自定义过滤器来修改或扩展指定包含排除的Bean的过滤规则。
@@ -163,5 +163,6 @@ public class CustomFilterType implements TypeFilter {
     }
 ```
 ![image-20220426222248766](../../../.vuepress/public/assets/images/2022/spring-14.png)
+
 输出结果中还输出了 customFilterType，这是为什么呢？原因是我们扫描的是 cn.forbearance.section03 包，该包下的每一个类都会在自定义规则中进行匹配。CustomFilterType 也包括在内。
 ## 小结
