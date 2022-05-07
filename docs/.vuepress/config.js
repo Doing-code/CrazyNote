@@ -510,7 +510,9 @@ function getBarFrameworkTheSpring() {
                 "2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md",
                 "2022-04-26-第二章：@ComponentScan-自动扫描组件&指定扫描规则.md",
                 "2022-04-28-第三章：自定义TypeFilter指定过滤规则.md",
-                "2022-05-04-第四章：@Scope-设置组件作用域.md"
+                "2022-05-04-第四章：@Scope-设置组件作用域.md",
+                "2022-05-05-第五章：@Lazy，bean的懒加载.md",
+                "2022-05-05-第六章：@Conditional，按照条件注册bean.md"
             ]
         },
         {
