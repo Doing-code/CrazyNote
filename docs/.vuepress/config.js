@@ -33,7 +33,7 @@ module.exports = {
         "/": {
             lang: "zh-CN",
             title: "forbearance",
-            description: "Patience, restraint, and tolerance"
+            description: "Patience, restraint and tolerance"
         }
     },
     head: [
@@ -231,7 +231,7 @@ module.exports = {
                         items: [
                             {
                                 text: 'Spring注解驱动',
-                                link: '/md/framework/spring/2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md'
+                                link: '/md/framework/spring/2022-04-25-第1章：@Configuration和@Bean给容器中注册组件.md'
                             },
                             // {
                             //     text: 'SpringMVC',
@@ -499,7 +499,6 @@ module.exports = {
     }
 }
 
-// 3
 function getBarFrameworkTheSpring() {
     return [
         {
@@ -507,12 +506,16 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-04-25-第一章：@Configuration和@Bean给容器中注册组件.md",
-                "2022-04-26-第二章：@ComponentScan-自动扫描组件&指定扫描规则.md",
-                "2022-04-28-第三章：自定义TypeFilter指定过滤规则.md",
-                "2022-05-04-第四章：@Scope-设置组件作用域.md",
-                "2022-05-05-第五章：@Lazy，bean的懒加载.md",
-                "2022-05-05-第六章：@Conditional，按照条件注册bean.md"
+                "2022-04-25-第1章：@Configuration和@Bean给容器中注册组件.md",
+                "2022-04-26-第2章：@ComponentScan-自动扫描组件&指定扫描规则.md",
+                "2022-04-28-第3章：自定义TypeFilter指定过滤规则.md",
+                "2022-05-04-第4章：@Scope-设置组件作用域.md",
+                "2022-05-05-第5章：@Lazy-bean的懒加载.md",
+                "2022-05-06-第6章：@Conditional-按照条件注册bean.md",
+                "2022-05-08-第7章：@Import-给容器中快速导入一个组件.md",
+                "2022-05-08-第8章：@Import-使用ImportSelector.md",
+                "2022-05-08-第9章：@Import-使用ImportBeanDefinitionRegistrar.md",
+                "2022-05-08-第10章：使用FactoryBean注册组件.md"
             ]
         },
         {
@@ -520,6 +523,8 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "2022-05-08-第11章：@Bean指定初始化和销毁方法.md",
+                "2022-05-08-第12章： InitializingBean和DisposableBean.md"
             ]
         },
         {
@@ -547,7 +552,6 @@ function getBarFrameworkTheSpring() {
     ]
 }
 
-// 8
 function getBarOperatingSystemTheLinux() {
     return [
         {
