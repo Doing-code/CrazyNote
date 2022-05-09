@@ -581,7 +581,9 @@ function getBarFrameworkTheSpring() {
             sidebarDepth: 0,
             children: [
                 "2022-05-08-第11章：@Bean指定初始化和销毁方法.md",
-                "2022-05-08-第12章： InitializingBean和DisposableBean.md"
+                "2022-05-08-第12章： InitializingBean和DisposableBean.md",
+                "2022-05-09-第13章：@PostConstruct&@PreDestroy.md",
+                "2022-05-09-第14章：BeanPostProcessor后置处理器.md"
             ]
         },
         {
