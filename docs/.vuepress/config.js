@@ -157,7 +157,7 @@ module.exports = {
             "/": {
                 label: "简体中文",
                 selectText: "Languages",
-                editLinkText: "在 GitHub 上编辑此页",
+                editLinkText: "编辑此页",
                 lastUpdated: "上次更新",
                 nav: [
                     {
@@ -181,66 +181,70 @@ module.exports = {
                             }
                         ]
                     },
-                    // {
-                    //     text: 'Java基础',
-                    //     items: [
-                    //         {
-                    //             text: 'Java',
-                    //             items: [
-                    //                 {
-                    //                     text: 'jvm',
-                    //                     link: ''
-                    //                 },
-                    //                 {
-                    //                     text: 'jmm',
-                    //                     link: ''
-                    //                 },
-                    //                 {
-                    //                     text: '类装载机制',
-                    //                     link: ''
-                    //                 },
-                    //                 {
-                    //                     text: '多线程并发',
-                    //                     link: ''
-                    //                 },
-                    //                 {
-                    //                     text: 'IO',
-                    //                     link: ''
-                    //                 },
-                    //                 {
-                    //                     text: '网络编程',
-                    //                     link: ''
-                    //                 },
-                    //             ]
-                    //         },
-                    //         {
-                    //             text: '23种设计模式',
-                    //             items: [
-                    //                 {
-                    //                     text: '创建型模式',
-                    //                     link: ''
-                    //                 },
-                    //                 {
-                    //                     text: '结构型模式',
-                    //                     link: ''
-                    //                 },
-                    //                 {
-                    //                     text: '行为型模式',
-                    //                     link: ''
-                    //                 }
-                    //             ]
-                    //         },
-                    //         {
-                    //             text: 'Linux',
-                    //             items: [
-                    //                 {
-                    //                     text: 'Linux',
-                    //                     link: '/md/java/linux/2022-04-26-第一章：Linux 操作文件目录.md'
-                    //                 }
-                    //             ]
-                    //         }
-                    //     ]
-                    // },
+                    {
+                        text: 'Java基础',
+                        items: [
+                            {
+                                text: 'Java',
+                                items: [
+                                    {
+                                        text: 'Java基础',
+                                        link: '/md/java/java/2022-05-09-第1章：Java是什么？.md'
+                                    }
+                                    // {
+                                    //     text: 'jvm',
+                                    //     link: ''
+                                    // },
+                                    // {
+                                    //     text: 'jmm',
+                                    //     link: ''
+                                    // },
+                                    // {
+                                    //     text: '类装载机制',
+                                    //     link: ''
+                                    // },
+                                    // {
+                                    //     text: '多线程并发',
+                                    //     link: ''
+                                    // },
+                                    // {
+                                    //     text: 'IO',
+                                    //     link: ''
+                                    // },
+                                    // {
+                                    //     text: '网络编程',
+                                    //     link: ''
+                                    // },
+                                ]
+                            },
+                            // {
+                            //     text: '23种设计模式',
+                            //     items: [
+                            //         {
+                            //             text: '创建型模式',
+                            //             link: ''
+                            //         },
+                            //         {
+                            //             text: '结构型模式',
+                            //             link: ''
+                            //         },
+                            //         {
+                            //             text: '行为型模式',
+                            //             link: ''
+                            //         }
+                            //     ]
+                            // },
+                            // {
+                            //     text: 'Linux',
+                            //     items: [
+                            //         {
+                            //             text: 'Linux',
+                            //             link: '/md/java/linux/2022-04-26-第一章：Linux 操作文件目录.md'
+                            //         }
+                            //     ]
+                            // }
+                        ]
+                    },
                     // {
                     //     text: '数据库',
                     //     items: [
@@ -544,7 +548,8 @@ module.exports = {
                 sidebar: {
                     "/md/spring/spring/": getBarFrameworkTheSpring(),
                     "/md/java/linux": getBarOperatingSystemTheLinux(),
-                    "/md/tools/git/": getBarToolsTheGit()
+                    "/md/tools/git/": getBarToolsTheGit(),
+                    '/md/java/java/': getBarJavaTheJava()
                 }
             }
         }
@@ -602,6 +607,87 @@ function getBarFrameworkTheSpring() {
     ]
 }
 
+function getBarJavaTheJava() {
+    return [
+        {
+            title: "Java概述",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2022-05-09-第1章：Java是什么？.md",
+                "2022-05-09-第2章：Java的特点.md",
+                "2022-05-09-第3章：JDK、JRE、JVM的关系.md"
+            ]
+        },
+        {
+            title: "基本语法",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "数组",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "面向对象",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "异常处理",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "常用API",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "枚举与注解",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "集合",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "泛型与IO",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "反射",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "Java8的新特性",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        },
+        {
+            title: "Java8之后版本的新特性",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: []
+        }
+    ]
+}
+
 function getBarOperatingSystemTheLinux() {
     return [
         {
@@ -635,3 +721,5 @@ function getBarToolsTheGit() {
         }
     ]
 }
+
+

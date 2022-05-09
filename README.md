@@ -6,12 +6,12 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/Doing-code/Java-Two-years-of-work-experience?logo=github)](https://github.com/Doing-code/Java-Two-years-of-work-experience)
 [![GitHub forks](https://img.shields.io/github/forks/Doing-code/Java-Two-years-of-work-experience?logo=github)](https://github.com/Doing-code/Java-Two-years-of-work-experience)
 
-## `工作地点目标: 深圳大冲，(高新园地铁站)`
-
-> 用 Python爬虫爬一些代理ip、以及图片，存放在MongoDB中
-> 
-> 搭建 git 服务器
-> 
-> 尝试实现深度学习
+## `工作地点目标: 深圳大冲`
 
 ## 非原创！非原创！非原创！
+
+## `2022-05-09: 现阶段需要熟练掌握的-（准备速成，打算花三个月学习一遍）：`
+
+`Java基础`、`IO`、`网络编程`、`多线程`、`JDBC`、`Servlet`、`Git`、`Maven`、`Spring`、`SpringMVC`、`MyBatis`、`SpringBoot`、`SpringCloud` <br/>
+`缓存`、`消息通信`、`MySQL`、`熟悉Linux`、`HTTP`、`WebSocket`、`分布式`、`Dubbo`、`Zookeeper`、`Elasticsearch`、`设计模式`、`JVM`、`SQL调优`
+
