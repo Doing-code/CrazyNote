@@ -234,15 +234,15 @@ module.exports = {
                             //         }
                             //     ]
                             // },
-                            // {
-                            //     text: 'Linux',
-                            //     items: [
-                            //         {
-                            //             text: 'Linux',
-                            //             link: '/md/java/linux/2022-04-26-第一章：Linux 操作文件目录.md'
-                            //         }
-                            //     ]
-                            // }
+                            {
+                                text: 'Linux',
+                                items: [
+                                    {
+                                        text: 'Linux',
+                                        link: '/md/java/linux/2022-05-11-第1章：ls，显示指定工作目录下的文件及属性信息.md'
+                                    }
+                                ]
+                            }
                         ]
                     },
                     // {
@@ -547,7 +547,7 @@ module.exports = {
                 ],
                 sidebar: {
                     "/md/spring/spring/": getBarFrameworkTheSpring(),
-                    "/md/java/linux": getBarOperatingSystemTheLinux(),
+                    "/md/java/linux/": getBarOperatingSystemTheLinux(),
                     "/md/tools/git/": getBarToolsTheGit(),
                     '/md/java/java/': getBarJavaTheJava()
                 }
@@ -699,7 +699,9 @@ function getBarOperatingSystemTheLinux() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-04-26-第一章：Linux 操作文件目录.md"
+                "2022-05-11-第1章：ls，显示指定工作目录下的文件及属性信息.md",
+                "2022-05-11-第2章：cp，复制文件或目录.md",
+                "2022-05-11-第3章：mkdir，创建目录文件.md"
             ]
         },
         {

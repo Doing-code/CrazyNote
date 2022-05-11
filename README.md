@@ -15,3 +15,5 @@
 `Java基础`、`IO`、`网络编程`、`多线程`、`JDBC`、`Servlet`、`Git`、`Maven`、`Spring`、`SpringMVC`、`MyBatis`、`SpringBoot`、`SpringCloud` <br/>
 `缓存`、`消息通信`、`MySQL`、`熟悉Linux`、`HTTP`、`WebSocket`、`分布式`、`Dubbo`、`Zookeeper`、`Elasticsearch`、`设计模式`、`JVM`、`SQL调优`
 
+[linux](/docs/md/java/linux) 系列原创出至 [linuxcool](https://www.linuxcool.com/)
+
