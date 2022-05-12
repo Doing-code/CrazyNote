@@ -92,7 +92,7 @@ public void refresh() throws BeansException, IllegalStateException {
 
 到这一步，`BeanFactory` 已经创建完成，并且所有实现了`BeanFactoryPostProcessor`接口的`Bean`都已经初始化并且`postProcessBeanFactory(factory)`方法已经得到回调执行。Spring 也已经注册了一些特殊的 Bean，`environment`、`systemProperties`等
 
-接下来，如果没有设置懒加载，Spring 会初始化所有的 singleton beans》
+接下来，如果没有设置懒加载，Spring 会初始化所有的 singleton beans：
 ```java
 protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
     /*
@@ -202,8 +202,8 @@ public void preInstantiateSingletons() throws BeansException {
     }
 }
 ```
-接下来，我们进入到`getBean(beanName)`方法内部，这个方法警用用来从`BeanFactory`中获取一个bean，而初始化的过程也封装在这里面
-定位到`org.springframework.beans.factory.support.AbstractBeanFactory#getBean`，196行：
+接下来，我们进入到`getBean(beanName)`方法内部，这个方法经常用来从`BeanFactory`中获取一个bean，
+而初始化的过程也封装在这里面定位到`org.springframework.beans.factory.support.AbstractBeanFactory#getBean`，196行：
 ```java
 @Override
 public Object getBean(String name) throws BeansException {
