@@ -6,12 +6,7 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/Doing-code/Java-Two-years-of-work-experience?logo=github)](https://github.com/Doing-code/Java-Two-years-of-work-experience)
 [![GitHub forks](https://img.shields.io/github/forks/Doing-code/Java-Two-years-of-work-experience?logo=github)](https://github.com/Doing-code/Java-Two-years-of-work-experience)
 
-## `工作地点目标: 深圳大冲`
-
 ## 非原创！非原创！非原创！
-
-## `2022-05-09: 现阶段需要熟练掌握的-（准备速成，打算花三个月学习一遍）：`
-> 想往通信、网络安全、软件研发（大厂）方向发展...
 
 `Java基础`、`IO`、`网络编程`、`多线程`、`JDBC`、`Servlet`、`Git`、`Maven`、`Spring`、`SpringMVC`、`MyBatis`、`SpringBoot`、`SpringCloud` <br/>
 `缓存`、`消息通信`、`MySQL`、`熟悉Linux`、`HTTP`、`WebSocket`、`分布式`、`Dubbo`、`Zookeeper`、`Elasticsearch`、`设计模式`、`JVM`、`SQL调优`
@@ -20,3 +15,10 @@
 
 --------------------------------------------------------
 
+通信、网络安全、软件研发
+
+速成，六月份毕业，10月份打算离开武汉，五个月时间利用晚上自由时间速成 数据结构、计算机组成原理、计算机操作系统、计算机网络、Spring源码、MyBatis源码、SpringMVC源码、SpringBoot源码、sql 索引、存储过程。
+
+将Spring注解驱动篇完结后，然后会将学习中心放到数据结构、计算机组成原理、计算机操作系统以及计算机网络上。计算机基础这块学完之后， 至于那些框架啊、第三方组件啊、其实会用很简单，难得是理解它这么做的好处、如何设计的？学习源码体会设计思想。所以最后会重点学习理解源码。
+
+## `工作地点目标: 深圳大冲`

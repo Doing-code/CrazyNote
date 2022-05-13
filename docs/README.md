@@ -2,7 +2,7 @@
 home: true
 heroImage: /images/system/blog-01.jpg
 actionLinks:
-- link: /md/spring/spring/2022-04-25-第1章：@Configuration和@Bean给容器中注册组件.md
+- link: /md/408/datastructure/helloworld.md
   text: 开始阅读 →
   class: primary
 features:
