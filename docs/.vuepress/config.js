@@ -1,6 +1,6 @@
 module.exports = {
-    port: "4825",
-    dest: "/docs",
+    port: "8081",
+    dest: "/dist",
     base: "/",
     // 是否开启默认预加载js
     shouldPrefetch: (file, type) => {
@@ -603,23 +603,48 @@ function getBarFrameworkTheSpring() {
                 "2022-05-09-第13章：@PostConstruct&@PreDestroy.md",
                 "2022-05-09-第14章：BeanPostProcessor后置处理器.md",
                 "2022-05-10-第15章：BeanPostProcessor原理.md",
-                "2022-05-11-第16章：BeanPostProcessor在Spring底层的使用.md"
+                "2022-05-11-第16章：BeanPostProcessor在Spring底层的使用.md",
             ]
         },
         {
             title: "属性赋值",
             collapsable: false,
             sidebarDepth: 0,
-            children: []
+            children: [
+                "2022-05-12-第17章：@Value赋值.md",
+                "2022-05-14-第18章：@PropertySource加载外部配置文件.md"
+            ]
         },
         {
             title: "自动装配",
             collapsable: false,
             sidebarDepth: 0,
-            children: []
+            children: [
+                "2022-05-15-第19章：@Autowired&@Qualifier&@Primary.md",
+                "2022-05-15-第20章：@Resource&@Inject.md",
+                "2022-05-15-第21章：方法、构造器实现自动装配.md",
+                "2022-05-15-第22章：Aware注入Spring底层组件&原理.md",
+                "2022-05-15-第23章：@Profile根据环境注册bean.md"
+            ]
         },
         {
-            title: "源码解析",
+            title: "AOP原理",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2022-05-15-第24章：@EnableAspectJAutoProxy.md"
+            ]
+        },
+        {
+            title: "声明式事务",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                ""
+            ]
+        },
+        {
+            title: "扩展原理",
             collapsable: false,
             sidebarDepth: 0,
             children: [

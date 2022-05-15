@@ -11,14 +11,21 @@
 `Java基础`、`IO`、`网络编程`、`多线程`、`JDBC`、`Servlet`、`Git`、`Maven`、`Spring`、`SpringMVC`、`MyBatis`、`SpringBoot`、`SpringCloud` <br/>
 `缓存`、`消息通信`、`MySQL`、`熟悉Linux`、`HTTP`、`WebSocket`、`分布式`、`Dubbo`、`Zookeeper`、`Elasticsearch`、`设计模式`、`JVM`、`SQL调优`
 
-[linux](/docs/md/java/linux) 系列原创出至 [linuxcool](https://www.linuxcool.com/)
+linux 系列原创出自 [linuxcool](https://www.linuxcool.com/)
+
+Spring注解驱动若无指定说明，则Spring版本均为 4.3.12.
 
 --------------------------------------------------------
+`工作地点目标: 深圳`
 
-通信、网络安全、软件研发
+职业发展：通信、网络安全、互联网
 
-速成，六月份毕业，10月份打算离开武汉，五个月时间利用晚上自由时间速成 数据结构、计算机组成原理、计算机操作系统、计算机网络、Spring源码、MyBatis源码、SpringMVC源码、SpringBoot源码、sql 索引、存储过程。
+1. 速成：数据结构、计算机组成原理、计算机操作系统、计算机网络、(Spring、MyBatis、SpringMVC、SpringBoot 源码)、sql 索引、存储过程。
+2. 实现三个项目：netty 集群、抽奖系统、消息分发系统。
+3. 学完1、2之后，然后刷面试题。
 
-将Spring注解驱动篇完结后，然后会将学习中心放到数据结构、计算机组成原理、计算机操作系统以及计算机网络上。计算机基础这块学完之后， 至于那些框架啊、第三方组件啊、其实会用很简单，难得是理解它这么做的好处、如何设计的？学习源码体会设计思想。所以最后会重点学习理解源码。
+1、2、3 步实现之后，一年工作经验应该不是问题。
 
-## `工作地点目标: 深圳大冲`
+## 计划
+- [ ] 05-18 完结AOP源码
+- [ ] 05-25 完结Spring注解驱动篇

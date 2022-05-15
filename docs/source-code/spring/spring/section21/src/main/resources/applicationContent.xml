@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <!-- 包扫描：只要是标注了我们熟悉的@Controller、@Service、@Repository、@Component这四个注解中的任何一个的组件，它就会被自动扫描，并加进容器中 -->
+    <context:component-scan base-package="cn.forbearance.spring"/>
+
+    <context:property-placeholder location="classpath:application.properties" />
+    <!-- 向Spring容器中注册组件 -->
+    <bean id="book" class="cn.forbearance.spring.bean.Person">
+        <property name="name" value="${person.name}"/>
+        <property name="age" value="22"/>
+    </bean>
+
+</beans>
