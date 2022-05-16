@@ -293,7 +293,7 @@ module.exports = {
                         items: [
                             {
                                 text: 'Spring注解驱动',
-                                link: '/md/spring/spring/2022-04-25-第1章：@Configuration和@Bean给容器中注册组件.md'
+                                link: '/md/spring/spring/2022-04-25-01_@Configuration&@Bean-register-component.md'
                             },
                             {
                                 text: 'SpringMVC',
@@ -581,16 +581,16 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-04-25-第1章：@Configuration和@Bean给容器中注册组件.md",
-                "2022-04-26-第2章：@ComponentScan-自动扫描组件&指定扫描规则.md",
-                "2022-04-28-第3章：自定义TypeFilter指定过滤规则.md",
-                "2022-05-04-第4章：@Scope-设置组件作用域.md",
-                "2022-05-05-第5章：@Lazy-bean的懒加载.md",
-                "2022-05-06-第6章：@Conditional-按照条件注册bean.md",
-                "2022-05-08-第7章：@Import-给容器中快速导入一个组件.md",
-                "2022-05-08-第8章：@Import-使用ImportSelector.md",
-                "2022-05-08-第9章：@Import-使用ImportBeanDefinitionRegistrar.md",
-                "2022-05-08-第10章：使用FactoryBean注册组件.md"
+                "2022-04-25-01_@Configuration&@Bean-register-component.md",
+                "2022-04-26-02_@ComponentScan-auto-or-specify-scanner-component.md",
+                "2022-04-28-03_custom-TypeFilter.md",
+                "2022-05-04-04_@Scope-set-component-scope.md",
+                "2022-05-05-05_@Lazy-bean-lazy-loading.md",
+                "2022-05-06-06_@Conditional-condition-register-bean.md",
+                "2022-05-08-07_@Import-import-component.md",
+                "2022-05-08-08_@Import-use-ImportSelector.md",
+                "2022-05-08-09_@Import-use-ImportBeanDefinitionRegistrar.md",
+                "2022-05-08-10_use-FactoryBean-register-component.md"
             ]
         },
         {
@@ -598,12 +598,12 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-05-08-第11章：@Bean指定初始化和销毁方法.md",
-                "2022-05-08-第12章：InitializingBean和DisposableBean.md",
-                "2022-05-09-第13章：@PostConstruct&@PreDestroy.md",
-                "2022-05-09-第14章：BeanPostProcessor后置处理器.md",
-                "2022-05-10-第15章：BeanPostProcessor原理.md",
-                "2022-05-11-第16章：BeanPostProcessor在Spring底层的使用.md",
+                "2022-05-08-11_@Bean-specify-init&destroy.md",
+                "2022-05-08-12_InitializingBean&DisposableBean.md",
+                "2022-05-09-13_@PostConstruct&@PreDestroy.md",
+                "2022-05-09-14_BeanPostProcessor.md",
+                "2022-05-10-15_BeanPostProcessor-principle.md",
+                "2022-05-11-16_BeanPostProcessor-apply-of-spring.md",
             ]
         },
         {
@@ -611,8 +611,8 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-05-12-第17章：@Value赋值.md",
-                "2022-05-14-第18章：@PropertySource加载外部配置文件.md"
+                "2022-05-12-17_@Value-assign.md",
+                "2022-05-14-18_@PropertySource-load-external-config-file.md"
             ]
         },
         {
@@ -620,11 +620,11 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-05-15-第19章：@Autowired&@Qualifier&@Primary.md",
-                "2022-05-15-第20章：@Resource&@Inject.md",
-                "2022-05-15-第21章：方法、构造器实现自动装配.md",
-                "2022-05-15-第22章：Aware注入Spring底层组件&原理.md",
-                "2022-05-15-第23章：@Profile根据环境注册bean.md"
+                "2022-05-15-19_@Autowired&@Qualifier&@Primary.md",
+                "2022-05-15-20_@Resource&@Inject.md",
+                "2022-05-15-21_method&constructor-auto-wired.md",
+                "2022-05-15-22_Aware-inject-component&principle.md",
+                "2022-05-15-23_@Profile-register-by-environment-bean.md"
             ]
         },
         {
@@ -632,7 +632,8 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-05-15-第24章：@EnableAspectJAutoProxy.md"
+                "2022-05-15-24_@EnableAspectJAutoProxy.md",
+                "2022-05-15-25_register-AnnotationAwareAspectJAutoProxyCreator.md"
             ]
         },
         {
@@ -648,7 +649,6 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-04-20：Bean的初始化.md"
             ]
         }
     ]

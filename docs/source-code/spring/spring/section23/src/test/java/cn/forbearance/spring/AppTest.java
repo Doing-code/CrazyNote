@@ -30,7 +30,7 @@ public class AppTest {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         // 3、设置环境
         context.getEnvironment().setActiveProfiles("test");
-        // 4、注册`配置类
+        // 4、注册配置类
         context.register(BeanConfig.class);
         // 5、刷新容器
         context.refresh();

@@ -45,7 +45,8 @@ public void refresh() throws BeansException, IllegalStateException {
         /*
          告诉子类刷新内部 bean 工厂。
          拿到DefaultListableBeanFactory对象，提供给后续方法调用
-         将配置文件解析成一个个Bean定义并注册到BeanFactory中，(此时Bean还没有初始化)
+         将配置文件解析成一个个的bean定义，注册到BeanFactory中，这里bean并没有初始化，只是将bean信息保存到注册中心
+         所谓注册中心，实际上就是一个Map集合：key=beanName，value=beanDefinition
         */
         ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
