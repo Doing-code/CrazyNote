@@ -4,6 +4,7 @@ import cn.forbearance.spring.bean.Color;
 import cn.forbearance.spring.config.BeanConfig;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.sql.DataSource;
 
@@ -15,12 +16,13 @@ public class AppTest {
     @SuppressWarnings("resource")
     @Test
     public void test01() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
-        String[] beanNames = context.getBeanNamesForType(DataSource.class);
-        for (String beaName : beanNames) {
-            System.out.println(beaName);
-        }
-        context.close();
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("applicationContent.xml");
+//        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
+//        String[] beanNames = context.getBeanNamesForType(DataSource.class);
+//        for (String beaName : beanNames) {
+//            System.out.println(beaName);
+//        }
+//        context.close();
     }
 
     @SuppressWarnings("resource")
