@@ -4,6 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * @author cristina
@@ -16,6 +17,8 @@ public class LogAspect {
 
     @Before("pointCut()")
     public void saveLog(JoinPoint joinPoint) {
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext();
+        annotationConfigApplicationContext.getBean("");
         System.out.println("...");
     }
 

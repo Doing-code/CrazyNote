@@ -1,58 +1,65 @@
 # 第26章：Spring AOP 源码 解析
-在开始分析 Spring AOP 源码前，先来看一下 bean 的初始化过程，如下所示：
+&#8195;&#8195;在开始分析 Spring AOP 源码前，先来看一下 bean 的初始化过程，如下所示：
 
 ![forbearance.cn](../../../.vuepress/public/assets/images/2022/spring-77.png)
 
 ## 前置
-### AOP 常见概念
+### Spring AOP 常见概念
 #### 1、连接点（JoinPoint）
-所谓连接点是指那些被拦截到的点。程序执行的某个特定位置。如类开始前初始化、类初始化后，类某个方法调用前、方法调用后、方法抛出异常后。一个类或一段程序拥有一些具有边界性质的特定点，而这个特定点就称为连接点。在 Spring 中，这些点指的是方法，因为 Spring 值支持方法类型的连接点。
-通俗理解就是：业务层接口的所有方法都叫连接点。代码体现如下：
+&#8195;&#8195;所谓连接点是指那些被拦截到的点，程序执行的某个特定位置。在 Spring 中，这些点指的是方法，因为 Spring 值支持方法类型的连接点。业务层接口的所有方法都叫连接点。代码体现如下：
 
 ![forbearance.cn](../../../.vuepress/public/assets/images/2022/spring-78.png)
 
 #### 2、切点（Pointcut）
-所谓切入点就是指我们要对哪些`JoinPoint`进行拦截的定义。AOP 通过切点定位特定的连接点。比如`@Before("execution(public int cn.forbearance.spring.MathCalculator.*(..))")`中的`public int cn.forbearance.spring.MathCalculator.*(..)`这一串就是切入点表达式，即切点，表示指定在哪个方法切入。
-通俗理解就是：业务接口中被增强的方法叫切点。（连接点不一定是切点，但切点一定是连接点）。
+&#8195;&#8195;所谓切点就是指我们要对哪些`JoinPoint`进行拦截的定义。表示指定在哪个方法切入。业务接口中被增强的方法叫切点。（连接点不一定是切点，但切点一定是连接点）。
+```java
+@Before("execution(public int cn.forbearance.spring.MathCalculator.*(..))") 中的 public int cn.forbearance.spring.MathCalculator.*(..) 这一串就是切入点表达式，即切点，
+```
 
 #### 3、通知/增强（Advice）
-即增强的方法（包含了增强的横切代码）。所谓通知是指拦截到`JoinPoint`之后所要做的事情就是通知。通知定义了什么时候做什么事。通俗理解就是拦截到连接点之后需要执行的代码。
-
-通知的类型：前置通知、后置通知、异常通知、返回通知（在目标方法执行成功后调用）、环绕通知（在目标方法调用前后均可执行自定义逻辑，可手动执行`joinPoint.procced()`调用目标方法）。
+&#8195;&#8195;即增强的方法（包含了增强的横切代码）。所谓通知是指拦截到`JoinPoint`之后所要做的事情就是通知。通知定义了什么时候做什么事。就是拦截到连接点之后需要执行的代码。通知的类型：
+1. 前置通知
+2. 后置通知
+3. 异常通知
+4. 返回通知（在目标方法执行成功后调用）
+5. 环绕通知（在目标方法调用前后均可执行自定义逻辑，可手动执行`joinPoint.procced()`调用目标方法）
 
 #### 4、目标对象（Target）
-包含连接点的对象。所谓目标对象就是被一个或多个切面（通知和切点的结合）所通知的对象。比如`@Before("execution(public int cn.forbearance.spring.MathCalculator.*(..))")`中的`MathCalculator`就是目标对象（被代理的对象）。
+&#8195;&#8195;包含连接点的对象。所谓目标对象就是被一个或多个切面（通知和切点的结合）所通知的对象。（被代理的对象）
+```java
+比如 @Before("execution(public int cn.forbearance.spring.MathCalculator.*(..))") 中的 cn.forbearance.spring.MathCalculator 就是目标对象
+```
 
 #### 5、引介（Introduction）
-引介是一种特殊的增强，在不修改类代码的前提下，可以在运行期为类添加一些属性和方法，这样即便一个业务类原本没有实现某个接口，通过引介功能，也可以动态的为该业务类添加接口的实现逻辑。
+&#8195;&#8195;引介是一种特殊的增强，在不修改类代码的前提下，可以在运行期为类添加一些属性和方法，这样即便一个业务类原本没有实现某个接口，通过引介功能，也可以动态的为该业务类添加接口的实现逻辑。
 
 #### 6、织入（Weave）
-织入是将`Advice`（通知）应用到目标对象具体连接点上的过程。一般分为三种织入：动态代理织入、编译器织入和类装载器织入。Weave 是一个操作过程。
+&#8195;&#8195;织入是将`Advice`（通知）应用到目标对象具体连接点上的过程。一般分为三种织入：动态代理织入、编译器织入和类装载器织入。Weave 是一个操作过程。
 
 #### 7、切面（Aspect）
-切面由`Pointcut`（切点）和`Advice`（通知）组成的，它包括了对横切（非业务逻辑，比如日志功能、事务等等）关注功能的定义，也包括了对连接点的定义。通俗理解就是将业务代码抽离出来的一个类（用`@Aspect`注解标注的类）。
+&emsp;&emsp;切面由`Pointcut`（切点）和`Advice`（通知）组成的，它包括了对横切（非业务逻辑，比如日志功能、事务等等）关注功能的定义，也包括了对连接点的定义。通俗理解就是将业务代码抽离出来的一个类（用`@Aspect`注解标注的类）。
 
 #### 8、拦截器（Interceptor）
-在`Advice`的基础上扩展定义，定义了通知的增强方式，也就是通过对连接点（`JoinPoint`）的拦截。一个通用的拦截器可以拦截发生在基础程序中的运行时事件。
+&emsp;&emsp;在`Advice`的基础上扩展定义，定义了通知的增强方式，也就是通过对连接点（`JoinPoint`）的拦截。一个通用的拦截器可以拦截发生在基础程序中的运行时事件。
 
 #### 9、增强器/顾问（Advisor）
-增强器（Advisor）是切面的另一种实现，绑定通知和切点，没有指定切点的通知是没有意义的。`Advisor` 可以理解为是一个绑定在指定切点上的通知。它能够将通知以更为复杂的方式织入到目标对象中。是一个将通知包装为更复杂切面的装饰器。
+&emsp;&emsp;增强器（Advisor）是切面的另一种实现，绑定通知和切点，没有指定切点的通知是没有意义的。`Advisor` 可以理解为是一个绑定在指定切点上的通知。它能够将通知以更为复杂的方式织入到目标对象中。是一个将通知包装为更复杂切面的装饰器。
 
 #### 10、代理对象（Proxy）
-包含了原始对象的代码（在合适的位置调用目标对象的方法）和增加后的代码（`Advice` 通知的内容）的那个对象。
+&emsp;&emsp;包含了原始对象的代码（在合适的位置调用目标对象的方法）和增加后的代码（`Advice` 通知的内容）的那个对象（被增强后的对象）。
 
 ## 入口
 ![forbearance.cn](../../../.vuepress/public/assets/images/2022/spring-72.png)
 
-`META-INF`文件夹中是 Spring 自定义标签的配置文件，是对`<aop/>`标签的支持。
+&emsp;&emsp;`META-INF`文件夹中是 Spring 自定义标签的配置文件，是对`<aop/>`标签的支持。
 
-要实现自定义的xml配置，需要有两个默认 Spring 配置文件来支持。`spring.schemas`和`spring.handles`，`spring.schemas`文件用来验证自定义的xml配置文件是否符合格式要求，`spring.handles`文件则是用来告诉 Spring 该如何来解析自定义的配置文件。
+&emsp;&emsp;要实现自定义的xml配置，需要有两个默认 Spring 配置文件来支持。`spring.schemas`和`spring.handles`，`spring.schemas`文件用来验证自定义的xml配置文件是否符合格式要求，`spring.handles`文件则是用来告诉 Spring 该如何来解析自定义的配置文件。
 
-`spring.handles`文件内容如下：
+&emsp;&emsp;`spring.handles`文件内容如下：
 ```text
 http\://www.springframework.org/schema/aop=org.springframework.aop.config.AopNamespaceHandler
 ```
-配置的入口是`org.springframework.aop.config.AopNamespaceHandler`：
+&emsp;&emsp;配置的入口是`org.springframework.aop.config.AopNamespaceHandler`：
 ```javapackage org.springframework.aop.config;
 
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
@@ -79,12 +86,12 @@ public class AopNamespaceHandler extends NamespaceHandlerSupport {
 
 }
 ```
-注册几个`BeanDefinitionParser`，用来支持`config`、`aspectj-autoproxy`、`scoped-proxy`、`spring-configured`标签的功能。
+&emsp;&emsp;注册几个`BeanDefinitionParser`，用来支持`config`、`aspectj-autoproxy`、`scoped-proxy`、`spring-configured`标签的功能。
 `aspectj-autoproxy`是不是很眼熟，用于xml配置文件开启基于注解配置的aop代理
 ```java
 <aop:aspectj-autoproxy/>
 ```
-而这个标签会交给`AspectJAutoProxyBeanDefinitionParser`来解析这行配置，定位`org.springframework.aop.config.AspectJAutoProxyBeanDefinitionParser#parse`：
+&emsp;&emsp;而这个标签会交给`AspectJAutoProxyBeanDefinitionParser`来解析这行配置，定位`org.springframework.aop.config.AspectJAutoProxyBeanDefinitionParser#parse`：
 ```java
 @Override
 public BeanDefinition parse(Element element, ParserContext parserContext) {
@@ -96,7 +103,7 @@ public BeanDefinition parse(Element element, ParserContext parserContext) {
 }
 ```
 
-执行`org.springframework.aop.config.AopNamespaceHandler#init()`的调用方法栈如下所示：
+&emsp;&emsp;执行`org.springframework.aop.config.AopNamespaceHandler#init()`的调用方法栈如下所示：
 
 ![forbearance.cn](../../../.vuepress/public/assets/images/2022/spring-73.png)
 
@@ -114,7 +121,7 @@ public static void registerAspectJAnnotationAutoProxyCreatorIfNecessary(
     registerComponentIfNecessary(beanDefinition, parserContext);
 }
 ```
-定位到`org.springframework.aop.config.AopConfigUtils#registerAspectJAnnotationAutoProxyCreatorIfNecessary`，89行：
+&emsp;&emsp;定位到`org.springframework.aop.config.AopConfigUtils#registerAspectJAnnotationAutoProxyCreatorIfNecessary`，89行：
 ```java
 public static BeanDefinition registerAspectJAnnotationAutoProxyCreatorIfNecessary(BeanDefinitionRegistry registry, Object source) {
     return registerOrEscalateApcAsRequired(AnnotationAwareAspectJAutoProxyCreator.class, registry, source);
@@ -149,9 +156,9 @@ private static BeanDefinition registerOrEscalateApcAsRequired(Class<?> cls, Bean
 ```
 
 ### 处理 proxy-target-class 和 expose-proxy 属性
-定位`org.springframework.aop.config.AopNamespaceUtils#useClassProxyingIfNecessary`：
+&emsp;&emsp;定位`org.springframework.aop.config.AopNamespaceUtils#useClassProxyingIfNecessary`：
 
-注册`AnnotationAwareAspectJAutoProxyCreator`之后，Spring 会接着解析`<proxy-target-class/>`、`<expose-proxy/>`标签。如果属性存在的话，会将属性值设置到`AnnotationAwareAspectJAutoProxyCreator`对应的`BeanDefinition`中。
+&emsp;&emsp;注册`AnnotationAwareAspectJAutoProxyCreator`之后，Spring 会接着解析`<proxy-target-class/>`、`<expose-proxy/>`标签。如果属性存在的话，会将属性值设置到`AnnotationAwareAspectJAutoProxyCreator`对应的`BeanDefinition`中。
 ```java
 private static void useClassProxyingIfNecessary(BeanDefinitionRegistry registry, Element sourceElement) {
     if (sourceElement != null) {
@@ -168,7 +175,7 @@ private static void useClassProxyingIfNecessary(BeanDefinitionRegistry registry,
     }
 }
 ```
-如果存在标签，设置属性值：
+&emsp;&emsp;如果存在标签，设置属性值：
 ```java
 // proxy-target-class 属性的处理，org.springframework.aop.config.AopConfigUtils#forceAutoProxyCreatorToUseClassProxying
 public static void forceAutoProxyCreatorToUseClassProxying(BeanDefinitionRegistry registry) {
@@ -186,18 +193,17 @@ public static void forceAutoProxyCreatorToExposeProxy(BeanDefinitionRegistry reg
     }
 }
 ```
-1.`proxy-target-class` 用于强制使用 CGLib 为目标对象创建对象。但是使用 CGLib 有两个问题：1、无法代理`final`方法，因为它们不能被覆写，2、需要将 CGLib 二进制发行包放在 classpath 中；如果没有设置该标签，并且目标对象实现了至少一个接口，则会使用 JDK 动态代理。
-2.`expose-proxy` 用于解决目标对象内部的自我调用时，无法实现切面的增强的问题。
+1. `proxy-target-class` 用于强制使用 CGLib 为目标对象创建对象。但是使用 CGLib 有两个问题：1、无法代理`final`方法，因为它们不能被覆写，2、需要将 CGLib 二进制发行包放在 classpath 中；如果没有设置该标签，并且目标对象实现了至少一个接口，则会使用 JDK 动态代理。
+2. `expose-proxy` 用于解决目标对象内部的自我调用时，无法实现切面的增强的问题。
 
 ## 创建 AOP 代理
-Spring 会在容器中注册`AnnotationAwareAspectJAutoProxyCreator`，那么`AnnotationAwareAspectJAutoProxyCreator`类做了什么工作来完成 AOP 的工作呢？首先看看`AnnotationAwareAspectJAutoProxyCreator`类的结构层次：
+&emsp;&emsp;Spring 会在容器中注册`AnnotationAwareAspectJAutoProxyCreator`，那么`AnnotationAwareAspectJAutoProxyCreator`类做了什么工作来完成 AOP 的工作呢？首先看看`AnnotationAwareAspectJAutoProxyCreator`类的结构层次：
 
 ![forbearance.cn](../../../.vuepress/public/assets/images/2022/spring-74.png)
 
-查看`AnnotationAwareAspectJAutoProxyCreator`类的结构层次发现，该类实现了`BeanPostProcessor`接口。`BeanPostProcessor`包含两个方法：`postProcessBeforeInitialization()`和`postProcessAfterInitialization()`，分别在 bean 初始化前后执行。
-当 Spring 加载这个 bean 时会在初始化后调用`postProcessAfterInitialization()`方法，AOP 的逻辑分析从此开始。
+&emsp;&emsp;查看`AnnotationAwareAspectJAutoProxyCreator`类的结构层次发现，该类实现了`BeanPostProcessor`接口。`BeanPostProcessor`包含两个方法：`postProcessBeforeInitialization()`和`postProcessAfterInitialization()`，分别在 bean 初始化前后执行。当 Spring 加载这个 bean 时会在初始化后调用`postProcessAfterInitialization()`方法，AOP 的逻辑分析从此开始。
 
-定位`org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#postProcessAfterInitialization`
+&emsp;&emsp;定位`org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#postProcessAfterInitialization`
 ```java
 /**
  * Create a proxy with the configured interceptors if the bean is
@@ -210,7 +216,6 @@ public Object postProcessAfterInitialization(Object bean, String beanName) throw
         // 缓存链：1、beanName 不为空的话，使用 beanName（FactoryBean会在见面加上"&"）
         // 2、如果 beanName，使用 Class 对象作为缓存的 key
         Object cacheKey = getCacheKey(bean.getClass(), beanName);
-        // 判断 earlyProxyReferences 集合中是否包含有这个 bean 
         if (!this.earlyProxyReferences.contains(cacheKey)) {
             // 如果条件满足，则封装指定 bean，生成代理对象
             return wrapIfNecessary(bean, beanName, cacheKey);
@@ -219,7 +224,7 @@ public Object postProcessAfterInitialization(Object bean, String beanName) throw
     return bean;
 }
 ```
-定位`org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#wrapIfNecessary`：
+&emsp;&emsp;定位`org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#wrapIfNecessary`：
 ```java
 /**
  * Wrap the given bean if necessary, i.e. if it is eligible for being proxied.
@@ -262,9 +267,9 @@ protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) 
     return bean;
 }
 ```
-创建代理主要包含两个步骤：
-1.获取增强方法或者增强器。
-2.根据获取的增强进行代理。
+&emsp;&emsp;创建代理主要包含两个步骤：
+1. 获取增强方法或者增强器。
+2. 根据获取的增强进行代理。
 
 ### 获取增强方法或增强器
 ```java
@@ -302,13 +307,11 @@ protected List<Advisor> findEligibleAdvisors(Class<?> beanClass, String beanName
     return eligibleAdvisors;
 }
 ```
-对于指定 bean 的增强方法的获取包含两个步骤：
-1.获取所有的增强。
-2.获取所有的增强中适用于当前 bean 的增强，并能够应用的。
+&emsp;&emsp;对于指定 bean 的增强方法的获取包含两个步骤：
+1. 获取所有的增强。
+2. 获取所有的增强中适用于当前 bean 的增强，并能够应用的。
 
-AOP 源码分析是基于注解的，所以`findCandidateAdvisors()`方法的实现是由`AnnotationAwareAspectJAutoProxyCreator`类完成的。
-
-定位`org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator#findCandidateAdvisors`：
+&emsp;&emsp;AOP 源码分析是基于注解的，所以`findCandidateAdvisors()`方法的实现是由`AnnotationAwareAspectJAutoProxyCreator`类完成的。定位`org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator#findCandidateAdvisors`：
 ```java
 @Override
 protected List<Advisor> findCandidateAdvisors() {
@@ -321,8 +324,7 @@ protected List<Advisor> findCandidateAdvisors() {
 ```
 `AnnotationAwareAspectJAutoProxyCreator`继承了`AbstractAdvisorAutoProxyCreator`，在实现获取增强的方法中除了保留父类的获取配置文件中定义的增强外，同时添加了获取 bean 的注解增强功能，其实现由`this.aspectJAdvisorsBuilder.buildAspectJAdvisors()`方法来实现的。
 
-定位`org.springframework.aop.aspectj.annotation.BeanFactoryAspectJAdvisorsBuilder#buildAspectJAdvisors`：<br/>
-对 Spring 中所有的类进行分析，提取 Advisor。
+&emsp;&emsp;定位`org.springframework.aop.aspectj.annotation.BeanFactoryAspectJAdvisorsBuilder#buildAspectJAdvisors`：对 Spring 中所有的类进行分析，提取 Advisor。
 ```java
 /**
  * Look for AspectJ-annotated aspect beans in the current bean factory,
@@ -413,9 +415,9 @@ public List<Advisor> buildAspectJAdvisors() {
     return advisors;
 }
 ```
-至此，Advisor 的获取就完成了。接着深入细节分析增强器的获取，而这一功能委托给`this.advisorFactory.getAdvisors(factory)`方法去实现。
+&emsp;&emsp;至此，Advisor 的获取就完成了。接着深入细节分析增强器的获取，而这一功能委托给`this.advisorFactory.getAdvisors(factory)`方法去实现。
 
-定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory#getAdvisors`：
+&emsp;&emsp;定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory#getAdvisors`：
 ```java
 @Override
 public List<Advisor> getAdvisors(MetadataAwareAspectInstanceFactory aspectInstanceFactory) {
@@ -457,11 +459,10 @@ public List<Advisor> getAdvisors(MetadataAwareAspectInstanceFactory aspectInstan
     return advisors;
 }
 ```
-`getAdvisors()`方法首先完成了对增强器的获取，包括获取注解以及根据注解生成增强的步骤，然后判断是否配置了增强延迟初始化，如果有则在头部加入同步实例化增强器，保证增强使用之前的实例化，最后是对`@DeclareParent`注解的获取。下面将详细介绍每个步骤。
+&emsp;&emsp;`getAdvisors()`方法首先完成了对增强器的获取，包括获取注解以及根据注解生成增强的步骤，然后判断是否配置了增强延迟初始化，如果有则在头部加入同步实例化增强器，保证增强使用之前的实例化，最后是对`@DeclareParent`注解的获取。下面将详细介绍每个步骤。
 
 #### 1.增强器的获取
-增强器的获取逻辑`getAdvisor()`方法实现，实现步骤包括：对切点的注解的获取以及根据注解信息生成增强。<br/>
-定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory#getAdvisor`：
+&emsp;&emsp;增强器的获取逻辑`getAdvisor()`方法实现，实现步骤包括：对切点的注解的获取以及根据注解信息生成增强。定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory#getAdvisor`：
 ```java
 @Override
 public Advisor getAdvisor(Method candidateAdviceMethod, MetadataAwareAspectInstanceFactory aspectInstanceFactory,
@@ -481,7 +482,7 @@ public Advisor getAdvisor(Method candidateAdviceMethod, MetadataAwareAspectInsta
 ```
 
 ##### 1.切点信息的获取
-所谓获取切点信息获取就是指定注解的表达式信息的获取，如：`@Before("test()")`，定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory#getPointcut`：
+&emsp;&emsp;所谓获取切点信息获取就是指定注解的表达式信息的获取，如：`@Before("test()")`，定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory#getPointcut`：
 ```java
 private AspectJExpressionPointcut getPointcut(Method candidateAdviceMethod, Class<?> candidateAspectClass) {
     // 获取方法上的注解
@@ -533,7 +534,7 @@ private static <A extends Annotation> AspectJAnnotation<A> findAnnotation(Method
 ```
 
 ##### 2.根据切点信息生成增强
-所有的增强都由`Advisor`的实现类`InstantiationModelAwarePointcutAdvisorImpl`统一封装，定位`org.springframework.aop.aspectj.annotation.InstantiationModelAwarePointcutAdvisorImpl#InstantiationModelAwarePointcutAdvisorImpl`：
+&emsp;&emsp;所有的增强都由`Advisor`的实现类`InstantiationModelAwarePointcutAdvisorImpl`统一封装，定位`org.springframework.aop.aspectj.annotation.InstantiationModelAwarePointcutAdvisorImpl#InstantiationModelAwarePointcutAdvisorImpl`：
 ```java
 public InstantiationModelAwarePointcutAdvisorImpl(AspectJExpressionPointcut declaredPointcut,
         Method aspectJAdviceMethod, AspectJAdvisorFactory aspectJAdvisorFactory,
@@ -576,10 +577,9 @@ public InstantiationModelAwarePointcutAdvisorImpl(AspectJExpressionPointcut decl
     }
 }
 ```
-在封装过程中只是简单地将信息封装在类的实例中，仅仅只是赋值，在实例化的过程中还完成了对于增强器的初始化。因为不同的增强所体现的逻辑是不同的，比如`@Before("test()")`和`@After("test()")`标签的不同就是因为增强器增强的位置不同，所以就需要不同的增强器来完成不同的逻辑。
-而根据注解中的信息初始化对应的增强器就是在`instantiateAdvice()`方法中实现的。
+&emsp;&emsp;在封装过程中只是简单地将信息封装在类的实例中，仅仅只是赋值，在实例化的过程中还完成了对于增强器的初始化。因为不同的增强所体现的逻辑是不同的，比如`@Before("test()")`和`@After("test()")`标签的不同就是因为增强器增强的位置不同，所以就需要不同的增强器来完成不同的逻辑。而根据注解中的信息初始化对应的增强器就是在`instantiateAdvice()`方法中实现的。
 
-定位`org.springframework.aop.aspectj.annotation.InstantiationModelAwarePointcutAdvisorImpl#instantiateAdvice`：
+&emsp;&emsp;定位`org.springframework.aop.aspectj.annotation.InstantiationModelAwarePointcutAdvisorImpl#instantiateAdvice`：
 ```java
 private Advice instantiateAdvice(AspectJExpressionPointcut pcut) {
     return this.aspectJAdvisorFactory.getAdvice(this.aspectJAdviceMethod, pcut,
@@ -665,11 +665,11 @@ public Advice getAdvice(Method candidateAdviceMethod, AspectJExpressionPointcut 
     return springAdvice;
 }
 ```
-Spring 会根据不同的注解生成不同的增强器，比如 AtBefore 对应 AspectJMethodBeforeAdvice，在 AspectJMethodBeforeAdvice 中会完成增强方法的逻辑。接下来会尝试分析几个常用的增强器实现。
+&emsp;&emsp;Spring 会根据不同的注解生成不同的增强器，比如 AtBefore 对应 AspectJMethodBeforeAdvice，在 AspectJMethodBeforeAdvice 中会完成增强方法的逻辑。接下来会尝试分析几个常用的增强器实现。
 
-- MethodBeforeAdviceInterceptor
+1. MethodBeforeAdviceInterceptor
 
-先查看`MethodBeforeAdviceInterceptor`类的内部实现，定位`org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor`：
+&emsp;&emsp;先查看`MethodBeforeAdviceInterceptor`类的内部实现，定位`org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor`：
 ```java
 /**
  * Interceptor to wrap am {@link org.springframework.aop.MethodBeforeAdvice}.
@@ -701,7 +701,7 @@ public class MethodBeforeAdviceInterceptor implements MethodInterceptor, Seriali
 
 }
 ```
-其中的属性`MethodInvocation`代表前置增强的`AspectJMethodBeforeAdvice`，跟踪`before()`方法，定位`org.springframework.aop.aspectj.AspectJMethodBeforeAdvice#before`：
+&emsp;&emsp;其中的属性`MethodInvocation`代表前置增强的`AspectJMethodBeforeAdvice`，跟踪`before()`方法，定位`org.springframework.aop.aspectj.AspectJMethodBeforeAdvice#before`：
 ```java
 @Override
 public void before(Method method, Object[] args, Object target) throws Throwable {
@@ -734,14 +734,13 @@ protected Object invokeAdviceMethodWithGivenArgs(Object[] args) throws Throwable
     }
 }
 ```
-`invokeAdviceMethodWithGivenArgs()`方法中的`aspectJAdviceMethod`属性就是对应的前置增强的方法，在这里实现了调用。
+&emsp;&emsp;`invokeAdviceMethodWithGivenArgs()`方法中的`aspectJAdviceMethod`属性就是对应的前置增强的方法，在这里实现了调用。
 
-- AspectJAfterAdvice
+2. AspectJAfterAdvice
 
-后置增强与前置增强有稍许不一致的地方。回顾前面的前置增强，大致的结构实在拦截器中放置`MethodBeforeAdviceInterceptor`，而在`MethodBeforeAdviceInterceptor`中又放置了`AspectJMethodBeforeAdvice`，并在调用`invoke()`时首先串联调用。
-但是在后置增强的时候却不一样，没有提供中间类。而是直接在拦截器链中使用`AspectJAfterAdvice`。
+&emsp;&emsp;后置增强与前置增强有稍许不一致的地方。回顾前面的前置增强，大致的结构实在拦截器中放置`MethodBeforeAdviceInterceptor`，而在`MethodBeforeAdviceInterceptor`中又放置了`AspectJMethodBeforeAdvice`，并在调用`invoke()`时首先串联调用。但是在后置增强的时候却不一样，没有提供中间类。而是直接在拦截器链中使用`AspectJAfterAdvice`。
 
-定位`org.springframework.aop.aspectj.AspectJAfterAdvice`：
+&emsp;&emsp;定位`org.springframework.aop.aspectj.AspectJAfterAdvice`：
 ```java
 @SuppressWarnings("serial")
 public class AspectJAfterAdvice extends AbstractAspectJAdvice
@@ -779,7 +778,7 @@ public class AspectJAfterAdvice extends AbstractAspectJAdvice
 ```
 
 #### 2.增加同步实例化增强器
-如果获取的增强器不为空且配置了增强延迟初始化，那么需要在头部加入同步实例化增强器，定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory.SyntheticInstantiationAdvisor`：
+&emsp;&emsp;如果获取的增强器不为空且配置了增强延迟初始化，那么需要在头部加入同步实例化增强器，定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory.SyntheticInstantiationAdvisor`：
 ```java
 /**
  * Synthetic advisor that instantiates the aspect.
@@ -802,7 +801,7 @@ protected static class SyntheticInstantiationAdvisor extends DefaultPointcutAdvi
 ```
 
 #### 3.获取 DeclareParents 注解
-`DeclareParents`主要用于引介增强的注解形式的实现，实现方式与普通增强很类似，只不过使用`DeclareParentsAdvisor`对功能进行封装。定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory#getDeclareParentsAdvisor`：
+&emsp;&emsp;`DeclareParents`主要用于引介增强的注解形式的实现，实现方式与普通增强很类似，只不过使用`DeclareParentsAdvisor`对功能进行封装。定位`org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory#getDeclareParentsAdvisor`：
 
 ```java
 /**
@@ -829,7 +828,7 @@ private Advisor getDeclareParentsAdvisor(Field introductionField) {
 ```
 
 ### 筛选出匹配的增强器
-在上一步中以及完成了所有增强器的解析，但是对于所有的增强器来讲，并不一定都适用于当前 bean，还要进一步筛选出适合的增强器。也就是满足配置的通配符的增强器，具体实现在`findAdvisorsThatCanApply()`方法中。定位`org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator#findAdvisorsThatCanApply`：
+&emsp;&emsp;在上一步中以及完成了所有增强器的解析，但是对于所有的增强器来讲，并不一定都适用于当前 bean，还要进一步筛选出适合的增强器。也就是满足配置的通配符的增强器，具体实现在`findAdvisorsThatCanApply()`方法中。定位`org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator#findAdvisorsThatCanApply`：
 ```java
 /**
  * Search the given candidate Advisors to find all Advisors that
@@ -888,7 +887,7 @@ public static List<Advisor> findAdvisorsThatCanApply(List<Advisor> candidateAdvi
     return eligibleAdvisors;
 }
 ```
-`findAdvisorsThatCanApply()`方法主要的功能是获取所有增强器中适用于当前 bean 的增强器。引介增强与普通地增强处理是不一样的，所以分开处理。而对于真正的匹配在`canApply()`方法中实现。定位`org.springframework.aop.support.AopUtils#canApply`，273：
+&emsp;&emsp;`findAdvisorsThatCanApply()`方法主要的功能是获取所有增强器中适用于当前 bean 的增强器。引介增强与普通地增强处理是不一样的，所以分开处理。而对于真正的匹配在`canApply()`方法中实现。定位`org.springframework.aop.support.AopUtils#canApply`，273：
 ```java
 /**
  * Can the given advisor apply at all on the given class?
@@ -914,10 +913,10 @@ public static boolean canApply(Advisor advisor, Class<?> targetClass, boolean ha
     }
 }
 ```
-判断每一个通知方法能否匹配上切入点表达式。
+&emsp;&emsp;判断每一个通知方法能否匹配上切入点表达式。
 
 ### 创建代理
-在获取了所有对应 bean 的增强器后，便可以进行代理的创建了。定位`org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#createProxy`：
+&emsp;&emsp;在获取了所有对应 bean 的增强器后，便可以进行代理的创建了。定位`org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#createProxy`：
 ```java
 /**
  * Create an AOP proxy for the given bean.
@@ -971,16 +970,17 @@ protected Object createProxy(
     return proxyFactory.getProxy(getProxyClassLoader());
 }
 ```
-对于代理类的创建及处理，Spring 委托给了 ProxyFactory 去处理，而在`createProxy()`方法中主要是对 ProxyFactory 初始化操作，为真正创建代理做准备，这些初始化操作包括如下内容：
-1.获取当前类中的属性并赋值给父类（ProxyConfig）
-2.添加代理接口
-3.封装 Advisor 并添加到 ProxyFactory 中
-4.设置到代理的类
-5.提供了定制方法`customizeProxyFactory()`，子类可以在此方法中对 ProxyFactory 进行进一步的封装
-6.进行获取代理操作
-其中，封装 Advisor 并添加到 ProxyFactory 中以及创建代理是两个相对繁琐的过程，可以通过`ProxyFactory#addAdvisors`方法将增强器放置到代理创建工厂中，但是将拦截器封装为增强器还是需要一定的逻辑。
+&emsp;&emsp;对于代理类的创建及处理，Spring 委托给了 ProxyFactory 去处理，而在`createProxy()`方法中主要是对 ProxyFactory 初始化操作，为真正创建代理做准备，这些初始化操作包括如下内容：
+1. 获取当前类中的属性并赋值给父类（ProxyConfig）
+2. 添加代理接口
+3. 封装 Advisor 并添加到 ProxyFactory 中
+4. 设置到代理的类
+5. 提供了定制方法`customizeProxyFactory()`，子类可以在此方法中对 ProxyFactory 进行进一步的封装
+6. 进行获取代理操作
 
-定位`org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#buildAdvisors`：
+&emsp;&emsp;其中，封装 Advisor 并添加到 ProxyFactory 中以及创建代理是两个相对繁琐的过程，可以通过`ProxyFactory#addAdvisors`方法将增强器放置到代理创建工厂中，但是将拦截器封装为增强器还是需要一定的逻辑。
+
+&emsp;&emsp;定位`org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#buildAdvisors`：
 ```java
 /**
  * Determine the advisors for the given bean, including the specific interceptors
@@ -1022,7 +1022,7 @@ protected Advisor[] buildAdvisors(String beanName, Object[] specificInterceptors
     return advisors;
 }
 ```
-定位`org.springframework.aop.framework.adapter.DefaultAdvisorAdapterRegistry#wrap`：
+&emsp;&emsp;定位`org.springframework.aop.framework.adapter.DefaultAdvisorAdapterRegistry#wrap`：
 ```java
 @Override
 public Advisor wrap(Object adviceObject) throws UnknownAdviceTypeException {
@@ -1050,7 +1050,7 @@ public Advisor wrap(Object adviceObject) throws UnknownAdviceTypeException {
     throw new UnknownAdviceTypeException(advice);
 }
 ```
-由于 Spring 中涉及过多的拦截器、增强器、增强方法等方式来对逻辑进行增强，所有非常有必要统一封装成 Advisor 来进行代理的创建。完成了增强的封装过程，那么解析最重要的一步就是代理的创建与获取了。
+&emsp;&emsp;由于 Spring 中涉及过多的拦截器、增强器、增强方法等方式来对逻辑进行增强，所有非常有必要统一封装成 Advisor 来进行代理的创建。完成了增强的封装过程，那么解析最重要的一步就是代理的创建与获取了。
 
 ```java
 // org.springframework.aop.framework.ProxyFactory#getProxy， 108
@@ -1068,7 +1068,7 @@ public Object getProxy(ClassLoader classLoader) {
 }
 ```
 #### 1. 创建代理
-定位`org.springframework.aop.framework.ProxyCreatorSupport#createAopProxy`，：
+&emsp;&emsp;定位`org.springframework.aop.framework.ProxyCreatorSupport#createAopProxy`，：
 ```java
 /**
  * Subclasses should call this to get a new AOP proxy. They should <b>not</b>
@@ -1101,34 +1101,34 @@ public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException 
     }
 }
 ```
-到此已经完成了代理的创建，但是需要注意`ObjenesisCglibAopProxy`和`JdkDynamicAopProxy`，分别对应`JDKProxy`的实现和`CglibProxy`的实现，Spring 是如何选取的呢？接下来就从源码的角度分析，看看 Spring 是如何选择代理方式的。
+&emsp;&emsp;到此已经完成了代理的创建，但是需要注意`ObjenesisCglibAopProxy`和`JdkDynamicAopProxy`，分别对应`JDKProxy`的实现和`CglibProxy`的实现，Spring 是如何选取的呢？接下来就从源码的角度分析，看看 Spring 是如何选择代理方式的。
 
-从`if`中判断条件可以看到有三个方面会影响 Spring 的判断。
-1.`optimize`：用来控制通过 CGLib 创建的代理是否使用激进地优化策略。除非完全了解 AOP 代理如何处理优化，否则不推荐使用这个设置，目前这个属性仅用于 CGLib 代理，对于 JDK 动态代理（默认代理）无效。
-2.`proxyTargetClass`：这个属性为`true`时，目标类本身被代理而不是目标类的接口被代理，如果这个属性值被设为`true`，CGLib 代理将被创建，设置方式为`<aop:aspejt-autoproxy-proxy-target-class="true"`。
-3.`hasNoUserSuppliedProxyInterfaces`：是否存在代理接口
+&emsp;&emsp;从`if`中判断条件可以看到有三个方面会影响 Spring 的判断。
+1. `optimize`：用来控制通过 CGLib 创建的代理是否使用激进地优化策略。除非完全了解 AOP 代理如何处理优化，否则不推荐使用这个设置，目前这个属性仅用于 CGLib 代理，对于 JDK 动态代理（默认代理）无效。
+2. `proxyTargetClass`：这个属性为`true`时，目标类本身被代理而不是目标类的接口被代理，如果这个属性值被设为`true`，CGLib 代理将被创建，设置方式为`<aop:aspejt-autoproxy-proxy-target-class="true"`。
+3. `hasNoUserSuppliedProxyInterfaces`：是否存在代理接口
 
-JDK 与 CGLib 方式的总结：
+&emsp;&emsp;JDK 与 CGLib 方式的总结：
 - 如果目标对象实现了接口，默认情况下会采用 JDK 的动态代理实现 AOP。
 - 如果目标对象实现了接口，可以强制使用 CGLib 实现 AOP。
 - 如果目标对象没有实现接口，必须采用 CGLib 库，Spring 会自动在 JDK 动态代理和 CGLib 之间转换。
 
-如何强制使用 CGLib 实现 AOP？
-1.在`classpath`下添加 CGLib 库，
-2.在配置文件中配置`<aop:aspejt-autoproxy-proxy-target-class="true"`。
+&emsp;&emsp;如何强制使用 CGLib 实现 AOP？
+1. 在`classpath`下添加 CGLib 库，
+2. 在配置文件中配置`<aop:aspejt-autoproxy-proxy-target-class="true"`。
 
-JDK 动态代理和 CGLib 字节码生成的区别？
-1.JDK 动态代理只能对实现了接口的类生成代理，而不能针对类。
-2.CGLib 是针对类实现代理，主要是对指定的类生成一个子类，覆盖其中的方法。因为是继承，所以该类或方法最好不要声明为`final`。
+&emsp;&emsp;JDK 动态代理和 CGLib 字节码生成的区别？
+1. JDK 动态代理只能对实现了接口的类生成代理，而不能针对类。
+2. CGLib 是针对类实现代理，主要是对指定的类生成一个子类，覆盖其中的方法。因为是继承，所以该类或方法最好不要声明为`final`。
 
 #### 2. 获取代理
 ##### 1. JDK 代理
-回顾一下附录中的 JDK 代理的方式，在整个创建过程中，对于`InvocationHandler`的创建是最为核心的，在自定义的`InvocationHandler`中需要包含三个部分：
-1.构造器，将代理的对象传入。
-2.重写`invoke`方法，此方法中实现类 AOP 增强的所有逻辑。
-3.重写`getProxy`方法，
+&emsp;&emsp;回顾一下附录中的 JDK 代理的方式，在整个创建过程中，对于`InvocationHandler`的创建是最为核心的，在自定义的`InvocationHandler`中需要包含三个部分：
+1. 构造器，将代理的对象传入。
+2. 重写`invoke`方法，此方法中实现类 AOP 增强的所有逻辑。
+3. 重写`getProxy`方法，
 
-继续之前的跟踪，看看 Spring 中的 JDK 代理实现是不是也是如此的呢？定位`org.springframework.aop.framework.JdkDynamicAopProxy#getProxy`，116：
+&emsp;&emsp;继续之前的跟踪，看看 Spring 中的 JDK 代理实现是不是也是如此的呢？定位`org.springframework.aop.framework.JdkDynamicAopProxy#getProxy`，116：
 ```java
 @Override
 public Object getProxy(ClassLoader classLoader) {
@@ -1140,11 +1140,11 @@ public Object getProxy(ClassLoader classLoader) {
     return Proxy.newProxyInstance(classLoader, proxiedInterfaces, this);
 }
 ```
-JDKProxy 的使用关键是创建自定义的`InvocationHandler`，`InvocationHandler`中包含了需要覆盖的`getProxy()`方法，而当前的方法正是完成了这个操作。
+&emsp;&emsp;JDKProxy 的使用关键是创建自定义的`InvocationHandler`，`InvocationHandler`中包含了需要覆盖的`getProxy()`方法，而当前的方法正是完成了这个操作。
 ```java
 final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializable {... ...}
 ```
-JdkDynamicAopProxy 也确实实现了`InvocationHandler`接口。那么可以推断出，在 JdkDynamicAopProxy 中一定会有一个 invoke 方法，并且 JdkDynamicAopProxy 会把 AOP 的核心逻辑写在其中，定位`org.springframework.aop.framework.JdkDynamicAopProxy#invoke`：
+&emsp;&emsp;JdkDynamicAopProxy 也确实实现了`InvocationHandler`接口。那么可以推断出，在 JdkDynamicAopProxy 中一定会有一个 invoke 方法，并且 JdkDynamicAopProxy 会把 AOP 的核心逻辑写在其中，定位`org.springframework.aop.framework.JdkDynamicAopProxy#invoke`：
 ```java
 /**
  * Implementation of {@code InvocationHandler.invoke}.
@@ -1249,9 +1249,9 @@ public Object invoke(Object proxy, Method method, Object[] args) throws Throwabl
     }
 }
 ```
-上面的方法中最主要的工作就是创建了一个拦截器链，并使用`ReflectiveMethodInvocation`类进行了链的封装，而在`ReflectiveMethodInvocation`类的`proceed`方法中实现类拦截器的逐一调用，接下来继续探究，在`proceed`方法中是如何实现在目标方法前调用前置增强和在目在标方法后调用后置增强的呢？
+&emsp;&emsp;上面的方法中最主要的工作就是创建了一个拦截器链，并使用`ReflectiveMethodInvocation`类进行了链的封装，而在`ReflectiveMethodInvocation`类的`proceed`方法中实现类拦截器的逐一调用，接下来继续探究，在`proceed`方法中是如何实现在目标方法前调用前置增强和在目在标方法后调用后置增强的呢？
 
-定位`org.springframework.aop.framework.ReflectiveMethodInvocation#proceed`：
+&emsp;&emsp;定位`org.springframework.aop.framework.ReflectiveMethodInvocation#proceed`：
 ```java
 @Override
 public Object proceed() throws Throwable {
@@ -1292,12 +1292,12 @@ public Object proceed() throws Throwable {
     }
 }
 ```
-在`proceed()`方法中，代码逻辑并没有那么复杂，ReflectiveMethodInvocation 中的主要职责是维护了链式调用计数器，记录着当前调用链的位置，以便链可以有序地进行下去。在这个方法中并没有维护各种增强的顺序，而是将此工作委托给了各个增强器，使各个增强器在内部进行逻辑实现。
+&emsp;&emsp;在`proceed()`方法中，代码逻辑并没有那么复杂，ReflectiveMethodInvocation 中的主要职责是维护了链式调用计数器，记录着当前调用链的位置，以便链可以有序地进行下去。在这个方法中并没有维护各种增强的顺序，而是将此工作委托给了各个增强器，使各个增强器在内部进行逻辑实现。
 
 ##### 2.CGLib
-完成 CGLib 代理的类是`CglibAopProxy`类来实现的，按照前面分析的，`CglibAopProxy`的入口应该是在`getProxy()`。也就是说，在`CglibAopProxy`类的`getProxy()`方法中实现类`Enhancer`的创建及接口封装。
+&emsp;&emsp;完成 CGLib 代理的类是`CglibAopProxy`类来实现的，按照前面分析的，`CglibAopProxy`的入口应该是在`getProxy()`。也就是说，在`CglibAopProxy`类的`getProxy()`方法中实现类`Enhancer`的创建及接口封装。
 
-定位`org.springframework.aop.framework.CglibAopProxy#getProxy`，155：
+&emsp;&emsp;定位`org.springframework.aop.framework.CglibAopProxy#getProxy`，155：
 ```java
 @Override
 public Object getProxy(ClassLoader classLoader) {
@@ -1367,7 +1367,7 @@ public Object getProxy(ClassLoader classLoader) {
     }
 }
 ```
-以上方法完整的阐述了在 Spring 中创建 Enhancer 的过程，具体可以参考 Enhancer 的官方文档查看每个步骤的含义，这里最重要的是通过`getCallbacks()`方法设置拦截器链。
+&emsp;&emsp;以上方法完整的阐述了在 Spring 中创建 Enhancer 的过程，具体可以参考 Enhancer 的官方文档查看每个步骤的含义，这里最重要的是通过`getCallbacks()`方法设置拦截器链。
 
 定位`org.springframework.aop.framework.CglibAopProxy#getCallbacks`：
 ```java
@@ -1440,11 +1440,9 @@ private Callback[] getCallbacks(Class<?> rootClass) throws Exception {
     return callbacks;
 }
 ```
-在`getCallbacks()`方法中 Spring 考虑了很多情况，但是只需理解最常用的就可以了。比如将`advised`属性封装在`DynamicAdvisedInterceptor`并添加到`callbacks`中，这么做的目的是什么呢？如何调用呢？
-CGLib 对于方法的拦截是通过将自定义的拦截器（实现 MethodInterceptor 接口）加入到`Callback`中，并在调用代理时直接激活拦截器中的`intercept()`方法来实现的。而在`getCallbacks()`方法正是实现了这样一个目的，
-**`DynamicAdvisedInterceptor`实现了`MethodInterceptor`**，加入到`Callback`中后，在下次调用代理时会直接调用`DynamicAdvisedInterceptor`的`intercept()`方法。由此可知，对于 CGLib 方式实现的代理，其核心逻辑必然在`DynamicAdvisedInterceptor`的`intercept()`方法中。
+&emsp;&emsp;在`getCallbacks()`方法中 Spring 考虑了很多情况，但是只需理解最常用的就可以了。比如将`advised`属性封装在`DynamicAdvisedInterceptor`并添加到`callbacks`中，这么做的目的是什么呢？如何调用呢？对于方法的拦截是通过将自定义的拦截器（实现 MethodInterceptor 接口）加入到`Callback`中，并在调用代理时直接激活拦截器中的`intercept()`方法来实现的。而在`getCallbacks()`方法正是实现了这样一个目的，**`DynamicAdvisedInterceptor`实现了`MethodInterceptor`**，加入到`Callback`中后，在下次调用代理时会直接调用`DynamicAdvisedInterceptor`的`intercept()`方法。由此可知，对于 CGLib 方式实现的代理，其核心逻辑必然在`DynamicAdvisedInterceptor`的`intercept()`方法中。
 
-定位`org.springframework.aop.framework.CglibAopProxy.DynamicAdvisedInterceptor#intercept`：
+&emsp;&emsp;定位`org.springframework.aop.framework.CglibAopProxy.DynamicAdvisedInterceptor#intercept`：
 ```java
 @Override
 public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
@@ -1493,7 +1491,7 @@ public Object intercept(Object proxy, Method method, Object[] args, MethodProxy 
     }
 }
 ```
-上述的实现与 JDK 方式实现代理中的`invoke()`方法大同小异，都是首先构造链，然后封装此链进行串联调用。稍有些却别就是在 JDK 中直接构造`ReflectiveMethodInvocation`，而在 CGLib 中使用`CglibMethodInvocation`。`CglibMethodInvocation`继承自`ReflectiveMethodInvocation`，但是`proceed()`方法并没有重写。
+&emsp;&emsp;上述的实现与 JDK 方式实现代理中的`invoke()`方法大同小异，都是首先构造链，然后封装此链进行串联调用。稍有些却别就是在 JDK 中直接构造`ReflectiveMethodInvocation`，而在 CGLib 中使用`CglibMethodInvocation`。`CglibMethodInvocation`继承自`ReflectiveMethodInvocation`，但是`proceed()`方法并没有重写。
 
 > Spring 4.x ==> 目标方法正常执行：前置通知→目标方法→后置通知→返回通知
 > Spring 4.x ==> 目标方法出现异常：前置通知→目标方法→后置通知→异常通知
@@ -1508,7 +1506,7 @@ Spring AOP 流程图：
 
 ## 附录
 ### JDK 代理使用示例
-1.创建业务接口
+1. 创建业务接口
 ```java
 package cn.forbearance.spring.service;
 
@@ -1523,7 +1521,7 @@ public interface UserService {
     public void add();
 }
 ```
-2.创建业务接口实现类
+2. 创建业务接口实现类
 ```java
 package cn.forbearance.spring.service.impl;
 
@@ -1645,6 +1643,6 @@ public class AppTest {
 
 ![forbearance.cn](../../../.vuepress/public/assets/images/2022/spring-76.png)
 
-CGLib 包的底层通过使用一个小而快的字节码处理床架 ASM，来转换字节码并生成新的类。如果直接使用 ASM，必须要对 JVM 内部结构（包括 class 文件格式和指令集）都很熟悉。
+&emsp;&emsp;CGLib 包的底层通过使用一个小而快的字节码处理床架 ASM，来转换字节码并生成新的类。如果直接使用 ASM，必须要对 JVM 内部结构（包括 class 文件格式和指令集）都很熟悉。
 
 ### AOP 源码文件清单

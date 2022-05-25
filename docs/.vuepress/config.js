@@ -634,17 +634,18 @@ function getBarFrameworkTheSpring() {
             children: [
                 "2022-05-15-24-@EnableAspectJAutoProxy.md",
                 "2022-05-15-25-register-AnnotationAwareAspectJAutoProxyCreator.md",
-                "2022-05-18-26-spring-aop-source.md"
+                "2022-05-18-26-xml-spring-aop-source.md"
             ]
         },
-        // {
-        //     title: "声明式事务",
-        //     collapsable: false,
-        //     sidebarDepth: 0,
-        //     children: [
-        //         ""
-        //     ]
-        // },
+        {
+            title: "声明式事务",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2022-05-22-27-@EnableTransactionManagement-principle.md",
+                "2022-05-22-28-xml-transaction-principle.md"
+            ]
+        },
         // {
         //     title: "扩展原理",
         //     collapsable: false,
