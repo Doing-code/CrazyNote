@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxx.BlogMapper">
+
+    <resultMap id="authorResult" type="Author">
+        <id property="id" column="author_id"/>
+        <result property="username" column="author_username"/>
+        <result property="password" column="author_password"/>
+        <result property="email" column="author_email"/>
+    </resultMap>
+
+    <select id="findById" resultMap="authorResult">
+        select id, content from comment where post_id = #{post_id}
+    </select>
+
+    <insert id="1" keyProperty="">
+<!--        <selectKey -->
+    </insert>
+
+    <resultMap id="detailedBlogResultMap" type="Blog">
+        <constructor>
+            <idArg column="blog_id" javaType="int"/>
+        </constructor>
+        <result property="title" column="blog_title"/>
+        <association property="auhtor" resultMap="authorResult"/>
+        <collection property="posts" ofType="Post">
+            <id property="id" column="post_id"/>
+            <result property="content" column="post_content"/>
+            <collection property="comments" column="post_id" javaType="arraylist" ofType="Post" select="findById"/>
+            <discriminator javaType="int" column="draft">
+                <case value="1" resultType="DraftPost"></case>
+            </discriminator>
+        </collection>
+    </resultMap>
+
+    <select id="findBlogDetailsById" resultMap="detailedBlogResultMap">
+        select
+            B.id blog_id, B.title blog_title, B.author_id blog_author_id,
+            A.id author_id, A,username author_username, A.password author_password, A.email author_email,
+            P.id post_id, P.blog_id post_blog_id, P.content post_content, P.draft
+        from Blog B
+            left outer join Author A on B.author_id = A.id
+            left outer join Post P on B.id = P.blog_id
+        where B.id = #{id}
+    </select>
+</mapper>

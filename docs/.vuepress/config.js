@@ -301,7 +301,7 @@ module.exports = {
                             },
                             {
                                 text: 'MyBatis',
-                                link: '19'
+                                link: '/md/spring/develop-mybatis/2022-05-26-30-mybatis-principle.md'
                             },
                             {
                                 text: 'Spring Boot',
@@ -565,6 +565,7 @@ module.exports = {
                 ],
                 sidebar: {
                     "/md/spring/develop-spring/": getBarFrameworkTheSpring(),
+                    "/md/spring/develop-mybatis/": getBarFrameworkTheMyBatis(),
                     "/md/java/linux/": getBarOperatingSystemTheLinux(),
                     "/md/tools/git/": getBarToolsTheGit(),
                     '/md/java/java/': getBarJavaTheJava()
@@ -632,13 +633,12 @@ function getBarFrameworkTheSpring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "2022-05-15-24-@EnableAspectJAutoProxy.md",
-                "2022-05-15-25-register-AnnotationAwareAspectJAutoProxyCreator.md",
+                "2022-05-15-24-@EnableAspectJAutoProxy-principle.md",
                 "2022-05-18-26-xml-spring-aop-source.md"
             ]
         },
         {
-            title: "声明式事务",
+            title: "声明式事务原理",
             collapsable: false,
             sidebarDepth: 0,
             children: [
@@ -653,6 +653,26 @@ function getBarFrameworkTheSpring() {
         //     children: [
         //     ]
         // }
+    ]
+}
+
+function getBarFrameworkTheMyBatis() {
+    return [
+        {
+            title: "MyBatis 基础",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+            ]
+        },
+        {
+            title: "MyBatis 原理",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2022-05-26-30-mybatis-principle.md"
+            ]
+        }
     ]
 }
 
